@@ -1,0 +1,6 @@
+# feathersdk.robot.actuators.rh56f1_hand.recompilation Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.rh56f1_hand.recompilation
+   :show-inheritance:
+```

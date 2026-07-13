@@ -1,0 +1,19 @@
+# feathersdk.robot.actuators.damiao Package
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.damiao
+   :show-inheritance:
+```
+
+## Modules
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.robot.actuators.damiao.utils.md
+```
+
+> **Note:** `damaio_motor` is omitted because `DamiaoMotor` is missing the
+> generic parameters required by the Configurable framework
+> (`class DamiaoMotor(Motor):` should subscript `Motor[...]`). Re-add the
+> shim once that's fixed. `set_timeout` is a CLI script — not docs material.

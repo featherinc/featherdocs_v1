@@ -1,0 +1,124 @@
+# Feather SDK Documentation
+
+Documentation for SDK version **{{ sdk_version }}**.
+
+## Installation
+
+The Feather SDK is a Python package (Python 3.9–3.14) for controlling Feather
+robots. Install it from PyPI:
+
+```bash
+pip install feathersdk
+```
+
+### 1. Set up your robot config if it doesn't exist
+
+Robot behavior is driven by a Python configuration file. The SDK ships starter
+configs for each supported robot revision — copy one into a working directory
+with the bundled helper. You only need to do this once:
+
+```bash
+python3 -m feathersdk.installation.copy_configs /feathersys/configs v0.5.1
+```
+
+Supported revisions are `v0.4.0`, `v0.4.0_o-shaft`, and `v0.5.1`. This creates
+`/feathersys/configs/` containing `robot_conf.py` (the entry point) alongside the
+`systems`, `services`, and `infra` config modules it imports. Edit `robot_conf.py`
+to match your hardware.
+
+```{note}
+The destination directory must not already exist (the copy will not overwrite it)
+and must be writable — copying into a system path such as `/feathersys/` may
+require elevated permissions. To copy elsewhere, pass any path you own, e.g.
+`python3 -m feathersdk.installation.copy_configs ~/feather_configs v0.5.1`, and use
+that path in the next step.
+```
+
+### 2. Initialize and control the robot
+
+`initialize_feather_system` loads your config file and returns a ready-to-use
+`FeatherRobot`. Point it at the `robot_conf.py` you copied above:
+
+```python
+from feathersdk.robot.robot import initialize_feather_system, FeatherRobot
+from feathersdk.utils.feathertypes import cast
+
+robot = cast(FeatherRobot, initialize_feather_system('/feathersys/configs/robot_conf.py'))
+
+# Access the platforms and services enabled in your config
+nav = robot.navigation_system
+neck = robot.neck_system
+torso = robot.torso_system
+manipulation = robot.manipulation_system
+data_monitoring = robot.data_monitor_service
+```
+
+Anything not present in your config is `None`, so only the systems and services
+you enabled are available.
+
+<details>
+<summary><strong>More about configuration</strong></summary>
+
+**Configs are executable Python.** Running `robot_conf.py` builds a typed
+{py:class}`~feathersdk.robot.robot.FeatherRobotConfig` object and hands it to the
+SDK, so config values can be any Python expression and are validated when loaded.
+
+**File layout.** `copy_configs` lays down a small tree. `robot_conf.py` is the
+entry point; it imports config objects built by the modules under `infra/`,
+`services/`, and `systems/` and assembles them into one `FeatherRobotConfig`:
+
+```
+configs/
+├── robot_conf.py            # entry point — assembles and exports the full config
+├── infra/                   # comms_manager, data_monitor_service, logging
+├── services/                # battery_service
+└── systems/                 # navigation, neck, torso, arms, manipulation
+```
+
+**How it's loaded.** The last line of `robot_conf.py` calls `export_config(...)`.
+When you call `initialize_feather_system('.../robot_conf.py')` (or the lower-level
+`load_configs`), the SDK executes the file and reads back whatever you exported.
+Call `export_config` only once, in `robot_conf.py`; the other modules just build
+and return their config objects.
+
+**Enabling/disabling a system.** Every system and service field is optional — set
+it to `None` to disable it (that `robot.<name>` attribute is then `None` at
+runtime). The shipped `v0.5.1` config, for instance, sets
+`manipulation_system_config=None` and `battery_service_config=None`.
+
+**Editing safely.** Leave `version` and `set_root_feather_path(Path("/feathersys"))`
+alone unless the hardware itself changed. Everything else — motor limits,
+tolerances, rates, safe-stop policy — is meant to be tuned. Each field is
+documented on its config class in the API Reference:
+{py:class}`~feathersdk.robot.robot.FeatherRobotConfig`,
+{py:class}`~feathersdk.comms.comms_manager.CommsManagerConfig`, and the per-system
+`*Config` classes (e.g.
+{py:class}`~feathersdk.robot.actuator_systems.three_wheel_swerve_system.ThreeWheelSwerveSystemConfig`).
+
+</details>
+
+## Package Overview
+
+- **`robot`** — robot control and platform systems (manipulation, navigation, neck, torso)
+- **`configs`** — Python-based configuration loading (`load_configs`, `export_config`)
+- **`comms`** — communication layer (CAN, network interfaces)
+- **`ipc`** — client/server IPC for driving a robot across processes
+- **`utils`** — shared helpers and type utilities
+
+## API Reference
+
+```{toctree}
+:maxdepth: 3
+:caption: API Reference
+
+api/feathersdk
+```
+
+## Release Notes
+
+```{toctree}
+:maxdepth: 1
+:caption: Release Notes
+
+changelog
+```

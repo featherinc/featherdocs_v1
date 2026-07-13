@@ -1,0 +1,9 @@
+# feathersdk.robot.actuators.gripper Package
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.gripper
+   :show-inheritance:
+```
+
+> **Note:** `i2rt_gripper` is omitted because it imports `DamiaoMotor`,
+> which currently fails to load (see `damiao` package note).

@@ -1,0 +1,6 @@
+# feathersdk.robot.actuators.actuator Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.actuator
+   :show-inheritance:
+```

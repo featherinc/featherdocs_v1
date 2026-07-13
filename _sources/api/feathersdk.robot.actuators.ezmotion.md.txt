@@ -1,0 +1,14 @@
+# feathersdk.robot.actuators.ezmotion Package
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.ezmotion
+   :show-inheritance:
+```
+
+## Modules
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.robot.actuators.ezmotion.ezmotion.md
+```

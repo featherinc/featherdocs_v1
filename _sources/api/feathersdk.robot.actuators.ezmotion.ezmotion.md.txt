@@ -1,0 +1,6 @@
+# feathersdk.robot.actuators.ezmotion.ezmotion Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.ezmotion.ezmotion
+   :show-inheritance:
+```

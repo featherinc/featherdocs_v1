@@ -1,0 +1,6 @@
+# feathersdk.robot.actuators.sim.virtual_robstride Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.sim.virtual_robstride
+   :show-inheritance:
+```

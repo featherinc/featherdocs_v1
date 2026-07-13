@@ -1,0 +1,1029 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="feathersdk.robot.actuator_systems.neck_system Module" href="feathersdk.robot.actuator_systems.neck_system.html"><link rel="prev" title="feathersdk.robot.actuator_systems.actuator_system Module" href="feathersdk.robot.actuator_systems.actuator_system.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>feathersdk.robot.actuator_systems.arms_system Module - Feather SDK 0.1.7</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=94433fe1" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     <span class="doc-version-nav"><span class="doc-version-nav__label">Version:</span><select id="doc-version-select" class="doc-version-nav__select" aria-label="SDK version"><option>loading…</option></select><a class="doc-version-nav__all" href="https://featherinc.github.io/featherdocs_v1/versions.html">all releases</a></span> 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Feather SDK 0.1.7</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">Feather SDK 0.1.7</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="feathersdk.html">feathersdk Package</a><input aria-label="Toggle navigation of feathersdk Package" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="feathersdk.robot.html">feathersdk.robot Package</a><input aria-label="Toggle navigation of feathersdk.robot Package" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.robot.robot.html">feathersdk.robot.robot Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.robot.robot_module.html">feathersdk.robot.robot_module Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.robot.message_router.html">feathersdk.robot.message_router Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.robot.instance_lock.html">feathersdk.robot.instance_lock Module</a></li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="feathersdk.robot.actuator_systems.html">feathersdk.robot.actuator_systems Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuator_systems Package" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuator_systems.actuator_system.html">feathersdk.robot.actuator_systems.actuator_system Module</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">feathersdk.robot.actuator_systems.arms_system Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuator_systems.neck_system.html">feathersdk.robot.actuator_systems.neck_system Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuator_systems.three_wheel_swerve_system.html">feathersdk.robot.actuator_systems.three_wheel_swerve_system Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuator_systems.torso_system.html">feathersdk.robot.actuator_systems.torso_system Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="feathersdk.robot.actuators.html">feathersdk.robot.actuators Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators Package" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuators.actuator.html">feathersdk.robot.actuators.actuator Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuators.motor.html">feathersdk.robot.actuators.motor Module</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="feathersdk.robot.actuators.damiao.html">feathersdk.robot.actuators.damiao Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators.damiao Package" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.damiao.utils.html">feathersdk.robot.actuators.damiao.utils Module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="feathersdk.robot.actuators.ezmotion.html">feathersdk.robot.actuators.ezmotion Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators.ezmotion Package" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.ezmotion.ezmotion.html">feathersdk.robot.actuators.ezmotion.ezmotion Module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="feathersdk.robot.actuators.robstride.html">feathersdk.robot.actuators.robstride Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators.robstride Package" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html">feathersdk.robot.actuators.robstride.robstride_motor Module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.robstride.admin.html">feathersdk.robot.actuators.robstride.admin Module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.robstride.calibrate.html">feathersdk.robot.actuators.robstride.calibrate Module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.robstride.message_handler.html">feathersdk.robot.actuators.robstride.message_handler Module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.robstride.params.html">feathersdk.robot.actuators.robstride.params Module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="feathersdk.robot.actuators.sim.html">feathersdk.robot.actuators.sim Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators.sim Package" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.sim.virtual_actuator.html">feathersdk.robot.actuators.sim.virtual_actuator Module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.sim.virtual_robstride.html">feathersdk.robot.actuators.sim.virtual_robstride Module</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="feathersdk.robot.actuators.gripper.html">feathersdk.robot.actuators.gripper Package</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="feathersdk.robot.actuators.rh56f1_hand.html">feathersdk.robot.actuators.rh56f1_hand Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators.rh56f1_hand Package" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.rh56f1_hand.rh56f1_hand.html">feathersdk.robot.actuators.rh56f1_hand.rh56f1_hand Module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.rh56f1_hand.recompilation.html">feathersdk.robot.actuators.rh56f1_hand.recompilation Module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="feathersdk.robot.actuators.rh56dftp_hand.html">feathersdk.robot.actuators.rh56dftp_hand Package</a><input aria-label="Toggle navigation of feathersdk.robot.actuators.rh56dftp_hand Package" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="feathersdk.robot.actuators.rh56dftp_hand.rh56dftp_hand.html">feathersdk.robot.actuators.rh56dftp_hand.rh56dftp_hand Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="feathersdk.comms.html">feathersdk.comms Package</a><input aria-label="Toggle navigation of feathersdk.comms Package" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.comms.comms_manager.html">feathersdk.comms.comms_manager Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.comms.can_system.html">feathersdk.comms.can_system Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.utils.html">feathersdk.utils Package</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/api/feathersdk.robot.actuator_systems.arms_system.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-feathersdk.robot.actuator_systems.arms_system">
+<span id="feathersdk-robot-actuator-systems-arms-system-module"></span><h1>feathersdk.robot.actuator_systems.arms_system Module<a class="headerlink" href="#module-feathersdk.robot.actuator_systems.arms_system" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">ArmsSystemConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'arms_system'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe_stop_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SafeStopPolicy.COMPLIANCE_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operating_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actuators_share_same_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig" title="feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActuatorSystemConfig</span></code></a></p>
+<p>Configuration for the arms system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>safe_stop_policy</strong> (<a class="reference internal" href="feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.SafeStopPolicy" title="feathersdk.robot.actuators.actuator.SafeStopPolicy"><em>SafeStopPolicy</em></a>)</p></li>
+<li><p><strong>operating_frequency</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>actuators_share_same_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.module_name">
+<span class="sig-name descname"><span class="pre">module_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.module_name" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the module.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'frozen':</span> <span class="pre">True}</span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsSystem">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">ArmsSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem" title="feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActuatorSystem</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">TArmsSystemConfig</span></code>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">TArmsSystemConfig</span></code>]</p>
+<p>A system that controls both arms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>TArmsSystemConfig</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.OpCmd">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">OpCmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">torque</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<p>A single operation command for a motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>torque</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The target torque in Newtons-meters.</p></li>
+<li><p><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The target angle in radians.</p></li>
+<li><p><strong>velocity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The target velocity in radians per second.</p></li>
+<li><p><strong>kp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The proportional gain, applied to the position error.</p></li>
+<li><p><strong>kd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The derivative gain, applied to the velocity error.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.OpCmd.angle">
+<span class="sig-name descname"><span class="pre">angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.angle" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.OpCmd.kd">
+<span class="sig-name descname"><span class="pre">kd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.kd" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.OpCmd.kp">
+<span class="sig-name descname"><span class="pre">kp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.kp" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.OpCmd.torque">
+<span class="sig-name descname"><span class="pre">torque</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.torque" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.OpCmd.velocity">
+<span class="sig-name descname"><span class="pre">velocity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.velocity" title="Link to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">Robstride7MArmConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'arm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe_stop_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SafeStopPolicy.COMPLIANCE_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operating_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actuators_share_same_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoulder_pitch_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoulder_roll_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoulder_yaw_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elbow_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrist_yaw_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrist_pitch_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrist_roll_motor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">require_approval_for_calibration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_abort_action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'disable'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocity_update_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_update_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kp_update_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig" title="feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActuatorSystemConfig</span></code></a></p>
+<p>Configuration for a single Robstride arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>safe_stop_policy</strong> (<a class="reference internal" href="feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.SafeStopPolicy" title="feathersdk.robot.actuators.actuator.SafeStopPolicy"><em>SafeStopPolicy</em></a>)</p></li>
+<li><p><strong>operating_frequency</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>actuators_share_same_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>side</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'left'</em><em>, </em><em>'right'</em><em>]</em>)</p></li>
+<li><p><strong>shoulder_pitch_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>shoulder_roll_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>shoulder_yaw_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>elbow_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>wrist_yaw_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>wrist_pitch_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>wrist_roll_motor</strong> (<a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><em>RobstrideMotorConfig</em></a>)</p></li>
+<li><p><strong>require_approval_for_calibration</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>on_abort_action</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'disable'</em><em>, </em><em>'freeze'</em><em>]</em>)</p></li>
+<li><p><strong>velocity_update_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>position_update_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>kp_update_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.module_name">
+<span class="sig-name descname"><span class="pre">module_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.module_name" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the module.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.side">
+<span class="sig-name descname"><span class="pre">side</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'left'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'right'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.side" title="Link to this definition">¶</a></dt>
+<dd><p>The side of the robot that the arm is on.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_pitch_motor">
+<span class="sig-name descname"><span class="pre">shoulder_pitch_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_pitch_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the shoulder pitch motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_roll_motor">
+<span class="sig-name descname"><span class="pre">shoulder_roll_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_roll_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the shoulder roll motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_yaw_motor">
+<span class="sig-name descname"><span class="pre">shoulder_yaw_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_yaw_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the shoulder yaw motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.elbow_motor">
+<span class="sig-name descname"><span class="pre">elbow_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.elbow_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the elbow motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_yaw_motor">
+<span class="sig-name descname"><span class="pre">wrist_yaw_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_yaw_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the wrist yaw motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_pitch_motor">
+<span class="sig-name descname"><span class="pre">wrist_pitch_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_pitch_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the wrist pitch motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_roll_motor">
+<span class="sig-name descname"><span class="pre">wrist_roll_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig"><span class="pre">RobstrideMotorConfig</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_roll_motor" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the wrist roll motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.require_approval_for_calibration">
+<span class="sig-name descname"><span class="pre">require_approval_for_calibration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.require_approval_for_calibration" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to require approval for calibration by prompting the user for permission. Should always be True for
+production systems for safety!</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.on_abort_action">
+<span class="sig-name descname"><span class="pre">on_abort_action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'disable'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'freeze'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.on_abort_action" title="Link to this definition">¶</a></dt>
+<dd><p>What to do when the arm is aborted. “disable” to home/disable motors, “freeze” to freeze the arm in place.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.velocity_update_threshold">
+<span class="sig-name descname"><span class="pre">velocity_update_threshold</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.velocity_update_threshold" title="Link to this definition">¶</a></dt>
+<dd><p>The threshold for updating the velocity of a motor. If new velocity is within this threshold of the last sent
+velocity, will not send an update.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.position_update_threshold">
+<span class="sig-name descname"><span class="pre">position_update_threshold</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.position_update_threshold" title="Link to this definition">¶</a></dt>
+<dd><p>The threshold for updating the position of a motor. If new position is within this threshold of the last sent
+position, will not send an update.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.kp_update_threshold">
+<span class="sig-name descname"><span class="pre">kp_update_threshold</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.kp_update_threshold" title="Link to this definition">¶</a></dt>
+<dd><p>The threshold for updating the kp of a motor. If new kp is within this threshold of the last sent kp, will not
+send an update.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'frozen':</span> <span class="pre">True}</span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">Robstride7MArm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem" title="feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActuatorSystem</span></code></a>[<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">Robstride7MArmConfig</span></code></a>]</p>
+<p>A single Robstride arm with 7 motor design.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><em>Robstride7MArmConfig</em></a>)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_pitch_motor">
+<span class="sig-name descname"><span class="pre">shoulder_pitch_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_pitch_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The shoulder pitch motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_roll_motor">
+<span class="sig-name descname"><span class="pre">shoulder_roll_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_roll_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The shoulder roll motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_yaw_motor">
+<span class="sig-name descname"><span class="pre">shoulder_yaw_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_yaw_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The shoulder yaw motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.elbow_motor">
+<span class="sig-name descname"><span class="pre">elbow_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.elbow_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The elbow motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_yaw_motor">
+<span class="sig-name descname"><span class="pre">wrist_yaw_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_yaw_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The wrist yaw motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_pitch_motor">
+<span class="sig-name descname"><span class="pre">wrist_pitch_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_pitch_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The wrist pitch motor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_roll_motor">
+<span class="sig-name descname"><span class="pre">wrist_roll_motor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><span class="pre">RobstrideMotor</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_roll_motor" title="Link to this definition">¶</a></dt>
+<dd><p>The wrist roll motor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_mode">
+<span class="sig-name descname"><span class="pre">set_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Set the mode of the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'position'</em><em>, </em><em>'operation'</em><em>]</em>) – The mode to set the arm to.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.capture_position">
+<span class="sig-name descname"><span class="pre">capture_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fresh_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_feedback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.capture_position" title="Link to this definition">¶</a></dt>
+<dd><p>Capture the position of the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fresh_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to get fresh values from the motors. If False, will use the last cached values.</p></li>
+<li><p><strong>trigger_feedback</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, will trigger a feedback frame for the motors to request the latest values.
+However, we may not get the latest values on this call as they may not have arrived yet. This will
+instead ensure that future calls within a short time frame will get the latest values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict mapping motor name to current position.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_op_targets">
+<span class="sig-name descname"><span class="pre">set_op_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">torques</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_op_targets" title="Link to this definition">¶</a></dt>
+<dd><p>Set the operation-mode targets of the arm.</p>
+<p>Will only update the targets that are provided for the motors that are provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>torques</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dict mapping motor name to torque.</p></li>
+<li><p><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dict mapping motor name to position.</p></li>
+<li><p><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dict mapping motor name to velocity.</p></li>
+<li><p><strong>kps</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>] </em><em>| </em><em>None</em>) – Dict mapping motor name to kp.</p></li>
+<li><p><strong>kds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>] </em><em>| </em><em>None</em>) – Dict mapping motor name to kd.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_position">
+<span class="sig-name descname"><span class="pre">set_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_position" title="Link to this definition">¶</a></dt>
+<dd><p>Set the position of the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> – Dict mapping motor name to position. If values for any motors are missing or None, will not update
+the position for that motor.</p></li>
+<li><p><strong>velocities</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>] </em><em>| </em><em>None</em>) – Dict mapping motor name to velocity. If None, will not update velocities. If values for any
+motors are missing or None, will not update the velocity for that motor.</p></li>
+<li><p><strong>kps</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>] </em><em>| </em><em>None</em>) – Dict mapping motor name to kp. If None, will not update kps. If values for any motors are missing or
+None, will not update the kp for that motor.</p></li>
+<li><p><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.go_to">
+<span class="sig-name descname"><span class="pre">go_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.go_to" title="Link to this definition">¶</a></dt>
+<dd><p>Go to the given positions in the given time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dict mapping motor name to position. Will only move the motors that are present.</p></li>
+<li><p><strong>total_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The total time to reach the positions.</p></li>
+<li><p><strong>kps</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>] </em><em>| </em><em>None</em>) – Dict mapping motor name to kp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.enable">
+<span class="sig-name descname"><span class="pre">enable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.enable" title="Link to this definition">¶</a></dt>
+<dd><p>Enable the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.disable">
+<span class="sig-name descname"><span class="pre">disable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.disable" title="Link to this definition">¶</a></dt>
+<dd><p>Disable the arm. Moves to home position first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.home">
+<span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.home" title="Link to this definition">¶</a></dt>
+<dd><p>Home the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>block</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to block the current thread until the home is complete.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.freeze">
+<span class="sig-name descname"><span class="pre">freeze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.freeze" title="Link to this definition">¶</a></dt>
+<dd><p>Freeze the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.recalibrate">
+<span class="sig-name descname"><span class="pre">recalibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allow_load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.recalibrate" title="Link to this definition">¶</a></dt>
+<dd><p>Recalibrate the arm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>allow_load</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">Robstride7MArmSystemConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'arms_system'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe_stop_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SafeStopPolicy.COMPLIANCE_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operating_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actuators_share_same_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_arm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_arm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig" title="feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArmsSystemConfig</span></code></a></p>
+<p>Configuration for a full Robstride arm system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>safe_stop_policy</strong> (<a class="reference internal" href="feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.SafeStopPolicy" title="feathersdk.robot.actuators.actuator.SafeStopPolicy"><em>SafeStopPolicy</em></a>)</p></li>
+<li><p><strong>operating_frequency</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>actuators_share_same_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>right_arm</strong> (<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><em>Robstride7MArmConfig</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>left_arm</strong> (<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><em>Robstride7MArmConfig</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'frozen':</span> <span class="pre">True}</span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.right_arm">
+<span class="sig-name descname"><span class="pre">right_arm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><span class="pre">Robstride7MArmConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.right_arm" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the right arm. Leave None to not include a right arm.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.left_arm">
+<span class="sig-name descname"><span class="pre">left_arm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><span class="pre">Robstride7MArmConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.left_arm" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the left arm. Leave None to not include a left arm.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">Robstride7MArmSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem" title="feathersdk.robot.actuator_systems.arms_system.ArmsSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArmsSystem</span></code></a>[<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">Robstride7MArmSystemConfig</span></code></a>]</p>
+<p>A system that controls 1-2 Robstride arms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig"><em>Robstride7MArmSystemConfig</em></a>)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.right_arm">
+<span class="sig-name descname"><span class="pre">right_arm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm"><span class="pre">Robstride7MArm</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.right_arm" title="Link to this definition">¶</a></dt>
+<dd><p>The right arm. None if not using a right arm.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.left_arm">
+<span class="sig-name descname"><span class="pre">left_arm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm"><span class="pre">Robstride7MArm</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.left_arm" title="Link to this definition">¶</a></dt>
+<dd><p>The left arm. None if not using a left arm.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.recalibrate">
+<span class="sig-name descname"><span class="pre">recalibrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allow_load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.recalibrate" title="Link to this definition">¶</a></dt>
+<dd><p>Recalibrate the arms system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>allow_load</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em> | </em><em>None</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.capture_position">
+<span class="sig-name descname"><span class="pre">capture_position</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.capture_position" title="Link to this definition">¶</a></dt>
+<dd><p>Capture the position of the arms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict mapping arm name to dict mapping motor name to current position.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.set_position">
+<span class="sig-name descname"><span class="pre">set_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_arm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_arm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.set_position" title="Link to this definition">¶</a></dt>
+<dd><p>Set the position of the arms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left_arm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dict mapping motor name to position.</p></li>
+<li><p><strong>right_arm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em>) – Dict mapping motor name to position.</p></li>
+<li><p><strong>kps</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>] </em><em>| </em><em>None</em>) – Dict mapping motor name to kp. Includes all motors, left arm and right, if using</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.enable">
+<span class="sig-name descname"><span class="pre">enable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.enable" title="Link to this definition">¶</a></dt>
+<dd><p>Enable the arms system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.disable">
+<span class="sig-name descname"><span class="pre">disable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.disable" title="Link to this definition">¶</a></dt>
+<dd><p>Disable the arms system. Moves to home position first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.home">
+<span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.home" title="Link to this definition">¶</a></dt>
+<dd><p>Home the arms system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.freeze">
+<span class="sig-name descname"><span class="pre">freeze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.freeze" title="Link to this definition">¶</a></dt>
+<dd><p>Freeze the arms system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="feathersdk.robot.actuator_systems.neck_system.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">feathersdk.robot.actuator_systems.neck_system Module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="feathersdk.robot.actuator_systems.actuator_system.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">feathersdk.robot.actuator_systems.actuator_system Module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Feather Robotics
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">feathersdk.robot.actuator_systems.arms_system Module</a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig"><code class="docutils literal notranslate"><span class="pre">ArmsSystemConfig</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.module_name"><code class="docutils literal notranslate"><span class="pre">ArmsSystemConfig.module_name</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.model_config"><code class="docutils literal notranslate"><span class="pre">ArmsSystemConfig.model_config</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem"><code class="docutils literal notranslate"><span class="pre">ArmsSystem</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd"><code class="docutils literal notranslate"><span class="pre">OpCmd</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.angle"><code class="docutils literal notranslate"><span class="pre">OpCmd.angle</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.kd"><code class="docutils literal notranslate"><span class="pre">OpCmd.kd</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.kp"><code class="docutils literal notranslate"><span class="pre">OpCmd.kp</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.torque"><code class="docutils literal notranslate"><span class="pre">OpCmd.torque</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.OpCmd.velocity"><code class="docutils literal notranslate"><span class="pre">OpCmd.velocity</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.module_name"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.module_name</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.side"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.side</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_pitch_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.shoulder_pitch_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_roll_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.shoulder_roll_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_yaw_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.shoulder_yaw_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.elbow_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.elbow_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_yaw_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.wrist_yaw_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_pitch_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.wrist_pitch_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.wrist_roll_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.wrist_roll_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.require_approval_for_calibration"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.require_approval_for_calibration</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.on_abort_action"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.on_abort_action</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.velocity_update_threshold"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.velocity_update_threshold</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.position_update_threshold"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.position_update_threshold</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.kp_update_threshold"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.kp_update_threshold</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.model_config"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmConfig.model_config</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_pitch_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.shoulder_pitch_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_roll_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.shoulder_roll_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.shoulder_yaw_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.shoulder_yaw_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.elbow_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.elbow_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_yaw_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.wrist_yaw_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_pitch_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.wrist_pitch_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.wrist_roll_motor"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.wrist_roll_motor</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_mode"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.set_mode()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.capture_position"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.capture_position()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_op_targets"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.set_op_targets()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_position"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.set_position()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.go_to"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.go_to()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.enable"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.enable()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.disable"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.disable()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.home"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.home()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.freeze"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.freeze()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.recalibrate"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.recalibrate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystemConfig</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.model_config"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystemConfig.model_config</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.right_arm"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystemConfig.right_arm</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystemConfig.left_arm"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystemConfig.left_arm</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.right_arm"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.right_arm</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.left_arm"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.left_arm</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.recalibrate"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.recalibrate()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.capture_position"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.capture_position()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.set_position"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.set_position()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.enable"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.enable()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.disable"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.disable()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.home"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.home()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmSystem.freeze"><code class="docutils literal notranslate"><span class="pre">Robstride7MArmSystem.freeze()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=ca7ad2ea"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/feather_docs_meta.js?v=7c7ea081"></script>
+    <script src="../_static/version-dropdown.js?v=4b12c303"></script>
+    </body>
+</html>

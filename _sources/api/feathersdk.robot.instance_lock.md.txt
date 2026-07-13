@@ -1,0 +1,6 @@
+# feathersdk.robot.instance_lock Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.instance_lock
+   :show-inheritance:
+```

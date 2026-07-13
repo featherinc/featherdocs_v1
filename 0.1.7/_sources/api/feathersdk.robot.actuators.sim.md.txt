@@ -1,0 +1,15 @@
+# feathersdk.robot.actuators.sim Package
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.sim
+   :show-inheritance:
+```
+
+## Modules
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.robot.actuators.sim.virtual_actuator.md
+feathersdk.robot.actuators.sim.virtual_robstride.md
+```

@@ -1,0 +1,6 @@
+# feathersdk.robot.actuators.robstride.calibrate Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.actuators.robstride.calibrate
+   :show-inheritance:
+```

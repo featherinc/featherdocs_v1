@@ -1,0 +1,6 @@
+# feathersdk.robot.message_router Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.message_router
+   :show-inheritance:
+```
