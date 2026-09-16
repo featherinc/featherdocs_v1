@@ -5,38 +5,50 @@
  * into Furo's announcement bar. See conf.py:html_theme_options.announcement
  * for where the placeholder element lives.
  *
- * The dropdown fetches the *latest* versions.json from the docs base URL
- * on every page load, so old version snapshots automatically pick up new
- * releases without a rebuild.
+ * versions.json lives at the site root and is fetched same-origin so custom
+ * domains (docs.feather.dev) work. Fetching the github.io URL 301s onto the
+ * custom domain without CORS headers and the browser blocks it.
  */
 (function () {
+  function docsRoot(meta) {
+    var origin = window.location.origin;
+    try {
+      if (meta.baseUrl) {
+        var baked = new URL(meta.baseUrl);
+        if (baked.origin === origin) {
+          return baked.href.replace(/\/$/, '');
+        }
+      }
+    } catch (e) {}
+    return origin;
+  }
+
+  function populate(select, root, meta, versions) {
+    select.innerHTML = '';
+
+    versions.forEach(function (v) {
+      var opt = document.createElement('option');
+      opt.value = root + '/' + v.version + '/';
+      opt.textContent = v.version + (v.version === meta.currentVersion ? ' (current)' : '');
+      if (v.version === meta.currentVersion) opt.selected = true;
+      select.appendChild(opt);
+    });
+
+    select.addEventListener('change', function () {
+      if (select.value) window.location.href = select.value;
+    });
+  }
+
   function init() {
     var meta = window.__FEATHER_DOCS || {};
     var select = document.getElementById('doc-version-select');
-    if (!select || !meta.versionsUrl) return;
+    if (!select) return;
 
-    fetch(meta.versionsUrl, { cache: 'no-store' })
+    var root = docsRoot(meta);
+    fetch(root + '/versions.json', { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
       .then(function (data) {
-        var versions = (data && data.versions) || [];
-        select.innerHTML = '';
-
-        var latestOpt = document.createElement('option');
-        latestOpt.value = meta.baseUrl + '/';
-        latestOpt.textContent = 'latest';
-        select.appendChild(latestOpt);
-
-        versions.forEach(function (v) {
-          var opt = document.createElement('option');
-          opt.value = meta.baseUrl + '/' + v.version + '/';
-          opt.textContent = v.version + (v.version === meta.currentVersion ? ' (current)' : '');
-          if (v.version === meta.currentVersion) opt.selected = true;
-          select.appendChild(opt);
-        });
-
-        select.addEventListener('change', function () {
-          if (select.value) window.location.href = select.value;
-        });
+        populate(select, root, meta, (data && data.versions) || []);
       })
       .catch(function (err) {
         select.innerHTML = '<option>versions unavailable</option>';

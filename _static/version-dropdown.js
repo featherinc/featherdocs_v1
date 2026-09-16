@@ -26,11 +26,6 @@
   function populate(select, root, meta, versions) {
     select.innerHTML = '';
 
-    var latestOpt = document.createElement('option');
-    latestOpt.value = root + '/';
-    latestOpt.textContent = 'latest';
-    select.appendChild(latestOpt);
-
     versions.forEach(function (v) {
       var opt = document.createElement('option');
       opt.value = root + '/' + v.version + '/';
