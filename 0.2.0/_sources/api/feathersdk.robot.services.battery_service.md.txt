@@ -1,0 +1,6 @@
+# feathersdk.robot.services.battery_service Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.services.battery_service
+   :show-inheritance:
+```

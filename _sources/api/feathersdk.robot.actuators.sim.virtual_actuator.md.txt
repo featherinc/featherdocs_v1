@@ -1,6 +1,0 @@
-# feathersdk.robot.actuators.sim.virtual_actuator Module
-
-```{eval-rst}
-.. automodule:: feathersdk.robot.actuators.sim.virtual_actuator
-   :show-inheritance:
-```

@@ -1,0 +1,6 @@
+# feathersdk.robot.services.camera_service Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.services.camera_service
+   :show-inheritance:
+```

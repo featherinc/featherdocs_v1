@@ -1,0 +1,15 @@
+# feathersdk.cli.control Package
+
+```{eval-rst}
+.. automodule:: feathersdk.cli.control
+   :show-inheritance:
+```
+
+## Modules
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.cli.control.keyboard.md
+feathersdk.cli.control.ps4.md
+```

@@ -1,0 +1,126 @@
+# FeatherCLI
+
+`feathercli` is the command-line tool installed with the Feather SDK. Use it to install robot configs onto the machine, 
+teleoperate the robot, and more.
+
+Run `feathercli --help` (or `feathercli <command> --help`) for the live flag list.
+
+## Commands
+
+### --> `feathercli install`
+
+Copy versioned robot configs onto the machine, or verify that a previous install looks correct.
+
+```bash
+sudo feathercli install --all -v YOUR_VERSION
+feathercli install --verify
+```
+
+`YOUR_VERSION` must match a bundled config set (for example `v0.5.1`). The available values are the directory names 
+under the SDK's `configs/user_configs/` package data; `feathercli install --help` lists the current choices.
+
+This requires `sudo` privelages when installing certain files/packages.
+
+| Flag | Description |
+| --- | --- |
+| `-a`, `--all` | Install everything currently provided by this command (the versioned configs). |
+| `-c`, `--configs` | Install the configs. |
+| `-v`, `--version` | Robot revision to install. Required when installing configs. |
+| `-o`, `--output` | Root directory to install into. Defaults to `/feathersys`. |
+| `-f`, `--force` | Overwrite an existing configs directory. Without this flag, an existing destination raises an error. |
+| `--verify` | Check that the install looks correct. Does not copy or overwrite anything. |
+
+`--verify` confirms that:
+* key folders/files exist and are accessible.
+* the robot config file imports successfully.
+
+---
+
+### --> `feathercli control`
+
+Start an interactive teleop session. The robot is initialized from the system configs unless you pass `--configs`.
+
+```bash
+feathercli control keyboard
+feathercli control ps4
+feathercli control keyboard --configs /path/to/configs
+```
+
+`control_method` is one of `keyboard`/`k`, or `ps4`.
+
+| Flag | Description |
+| --- | --- |
+| `control_method` | How to drive the robot: `keyboard` / `k`, or `ps4`. |
+| `-c`, `--configs` | Path to the configs to load. Defaults to the system configs. |
+
+Both modes initialize a `FeatherRobot` and stop motion on exit.
+
+#### Keyboard
+
+```bash
+feathercli control keyboard
+```
+
+Use the keyboard to control the robot.
+
+| Keys | Action |
+| --- | --- |
+| `w` `a` `s` `d` | Forward / left / backward / right |
+| `q` `e` | Rotate left / right (combine with WASD) |
+| `r` `f` | Torso up / down |
+| `i` `j` `k` `l` | Neck up / left / down / right |
+| `<` `>` | Decrease / increase speed multiplier |
+| `Ctrl+C` | Exit |
+
+#### PS4 controller
+
+```bash
+feathercli control ps4
+```
+
+Use a ps4 controller to control the robot.
+
+Requires [pygame](https://www.pygame.org/) (`pip install pygame`) and a connected DualShock 4.
+
+| Control | Action |
+| --- | --- |
+| Left stick | Holonomic translate (forward/back, left/right) |
+| Right stick | Yaw (left/right only; up/down is ignored) |
+| L2 / R2 | Torso down / up |
+| D-pad | Neck pitch (up/down) and yaw (left/right) |
+| Circle (`O`) | Abort the robot and exit |
+| `Ctrl+C` | Quit and stop the base and torso |
+
+To pair a DualShock 4 over Bluetooth, hold Share + PS until the lights blink, then:
+
+```bash
+bluetoothctl
+power on
+agent on
+default-agent
+scan on
+# wait for "Wireless Controller"
+pair XX:XX:XX:XX:XX:XX
+trust XX:XX:XX:XX:XX:XX
+connect XX:XX:XX:XX:XX:XX
+```
+
+NOTE: On startup the command samples the pad at rest and picks an axis layout, so keep the sticks centered and the 
+triggers released for about half a second.
+
+---
+
+### --> `feathercli example`
+
+Copy the bundled `feathersdk_example.ipynb` notebook into a working directory. The notebook shows 
+`initialize_feather_system()` and a few motion snippets.
+
+```bash
+feathercli example
+feathercli example -o /path/to/dir
+feathercli example -o ./my_notebook.ipynb
+```
+
+| Flag | Description |
+| --- | --- |
+| `-o`, `--output` | Destination path. Defaults to `./feathersdk_example.ipynb`. If the path is an existing directory, the notebook is copied into it with the same filename. |

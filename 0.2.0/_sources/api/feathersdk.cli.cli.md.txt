@@ -1,0 +1,6 @@
+# feathersdk.cli.cli Module
+
+```{eval-rst}
+.. automodule:: feathersdk.cli.cli
+   :show-inheritance:
+```

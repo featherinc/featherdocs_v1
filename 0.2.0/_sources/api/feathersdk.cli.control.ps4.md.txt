@@ -1,0 +1,6 @@
+# feathersdk.cli.control.ps4 Module
+
+```{eval-rst}
+.. automodule:: feathersdk.cli.control.ps4
+   :show-inheritance:
+```

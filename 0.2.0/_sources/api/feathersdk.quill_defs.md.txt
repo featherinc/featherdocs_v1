@@ -1,0 +1,14 @@
+# feathersdk.quill_defs Package
+
+```{eval-rst}
+.. automodule:: feathersdk.quill_defs
+   :show-inheritance:
+```
+
+## Subpackages
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.quill_defs.python_qdefs.md
+```

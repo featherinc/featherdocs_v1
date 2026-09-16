@@ -1,0 +1,6 @@
+# feathersdk.robot.comms.comms_manager Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.comms.comms_manager
+   :show-inheritance:
+```

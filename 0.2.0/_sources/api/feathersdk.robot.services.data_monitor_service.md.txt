@@ -1,0 +1,6 @@
+# feathersdk.robot.services.data_monitor_service Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.services.data_monitor_service
+   :show-inheritance:
+```

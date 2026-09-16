@@ -1,0 +1,6 @@
+# feathersdk.quill_defs.python_qdefs Package
+
+```{eval-rst}
+.. automodule:: feathersdk.quill_defs.python_qdefs
+   :show-inheritance:
+```

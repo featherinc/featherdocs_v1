@@ -1,6 +1,0 @@
-# feathersdk.comms.can_system Module
-
-```{eval-rst}
-.. automodule:: feathersdk.comms.can_system
-   :show-inheritance:
-```

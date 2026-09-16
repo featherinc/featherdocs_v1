@@ -1,0 +1,6 @@
+# feathersdk.ros2 Package
+
+```{eval-rst}
+.. automodule:: feathersdk.ros2
+   :show-inheritance:
+```

@@ -1,0 +1,24 @@
+# feathersdk.cli Package
+
+```{eval-rst}
+.. automodule:: feathersdk.cli
+   :show-inheritance:
+```
+
+## Modules
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.cli.cli.md
+feathersdk.cli.install.md
+```
+
+## Subpackages
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.cli.example.md
+feathersdk.cli.control.md
+```

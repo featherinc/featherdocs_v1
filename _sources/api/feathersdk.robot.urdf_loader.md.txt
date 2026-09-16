@@ -1,0 +1,6 @@
+# feathersdk.robot.urdf_loader Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.urdf_loader
+   :show-inheritance:
+```

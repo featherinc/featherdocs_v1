@@ -1,0 +1,6 @@
+# feathersdk.cli.control.keyboard Module
+
+```{eval-rst}
+.. automodule:: feathersdk.cli.control.keyboard
+   :show-inheritance:
+```

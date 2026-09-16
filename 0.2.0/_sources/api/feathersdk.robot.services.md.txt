@@ -1,0 +1,18 @@
+# feathersdk.robot.services Package
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.services
+   :show-inheritance:
+```
+
+## Modules
+
+```{toctree}
+:maxdepth: 2
+
+feathersdk.robot.services.battery_service.md
+feathersdk.robot.services.camera_service.md
+feathersdk.robot.services.data_monitor_service.md
+feathersdk.robot.services.imu_odometry_service.md
+feathersdk.robot.services.wheel_odometry_service.md
+```

@@ -1,0 +1,6 @@
+# feathersdk.logging Package
+
+```{eval-rst}
+.. automodule:: feathersdk.logging
+   :show-inheritance:
+```

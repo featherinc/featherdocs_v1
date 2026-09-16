@@ -1,0 +1,6 @@
+# feathersdk.robot.services.wheel_odometry_service Module
+
+```{eval-rst}
+.. automodule:: feathersdk.robot.services.wheel_odometry_service
+   :show-inheritance:
+```

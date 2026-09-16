@@ -1,0 +1,286 @@
+# Overview
+
+This page describes how the Feather SDK is organized around a single robot object and the modules attached to it.
+
+## `FeatherRobot` is the entry point
+
+Almost everything you do with the SDK starts from a {py:class}`~feathersdk.robot.robot.FeatherRobot`.
+
+Call {py:func}`~feathersdk.robot.robot.initialize_feather_system` to create one. That function loads your robot config
+(by default from the system install path) and returns a fully constructed `FeatherRobot`:
+
+```python
+from feathersdk.robot.robot import initialize_feather_system, FeatherRobot
+
+robot: FeatherRobot = initialize_feather_system()
+```
+
+`FeatherRobot` owns the robot's lifecycle: it finds hardware, starts the modules enabled in your config, and coordinates
+a clean abort/shutdown. You usually talk to higher-level pieces through attributes on the robot rather than constructing
+those pieces yourself — for example `robot.navigation_system`, `robot.torso_system`, or `robot.battery_service`.
+
+If a module is disabled in the config (its config field is `None`), the matching attribute on the robot is also `None`.
+
+## Robot modules
+
+Under the hood, a `FeatherRobot` is a container of {py:class}`~feathersdk.robot.robot_module.RobotModule` instances.
+
+A **robot module** is a self-contained subsystem with its own config and abort behavior. Every module belongs to one
+robot and is registered on that robot during initialization.
+
+There are two kinds of robot modules you will use day to day:
+
+* **Actuator systems** — groups of actuators that work together for one robot capability (drive base, neck, arms, …).
+* **Services** — supporting subsystems that sense, estimate, or monitor the robot rather than commanding a limb.
+
+The robot also keeps dictionaries of every module and every actuator (`robot.modules`, `robot.actuator_systems`,
+`robot.actuators_by_name`, …) for lower-level access when you need it.
+
+```text
+FeatherRobot
+├── Actuator systems          (RobotModules that move hardware)
+│   ├── navigation_system
+│   ├── torso_system
+│   ├── neck_system
+│   ├── arms_system
+│   └── manipulation_system
+└── Services                  (RobotModules that sense / monitor)
+    ├── data_monitor_service
+    ├── battery_service
+    ├── camera_service
+    └── odometry_service
+```
+
+## Actuator systems
+
+An {py:class}`~feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem` is a robot module that groups related
+actuators and the control logic for one task.
+
+Examples:
+
+* **Navigation system** — holonomic base wheels and steering.
+* **Torso system** — vertical lift for the upper body.
+* **Neck system** — pitch and yaw for the head.
+* **Arms system** — left/right arm joints.
+* **Manipulation system** — end effectors such as hands or grippers.
+
+You command the *capability* through the system API (for example setting base velocity or moving the torso to a height)
+instead of driving every motor yourself. The system decides how to turn that request into actuator commands.
+
+Systems will also expose individual actuators if you wish to implement control yourself.
+
+## Services
+
+A **service** is a robot module that is not primarily an actuator group. Services provide sensing, estimation, logging,
+or other background behavior the rest of the robot depends on.
+
+Examples include:
+
+* **Battery service** — battery state and power / e-stop related events.
+* **Camera service** — camera capture and related streams.
+* **Odometry service** — base pose estimates from IMU or wheel encoders.
+* **Data monitor service** — telemetry gathering and recorded robot data.
+
+Services are optional in the same way actuator systems are: omit their config to leave them disabled.
+
+## Actuators
+
+Every actuator system owns some number of {py:class}`~feathersdk.robot.actuators.actuator.Actuator` objects. An
+actuator is the SDK's handle for one controllable piece of hardware on the robot.
+
+Actuators come in a few flavors:
+
+* **Motors** — a rotating actuator, such as the joints in the arms system or the lift motor in the torso system.
+  {py:class}`~feathersdk.robot.actuators.motor.Motor` is the shared base class for these.
+* **Other actuators** — non-motor devices that still expose an actuator interface, such as hands or grippers in the
+  manipulation system.
+
+Each actuator has a unique name and ID on the robot, its own config, and telemetry. Actuator systems discover and
+initialize their actuators, then use them as the building blocks for higher-level motion.
+
+:::{note}
+Motor Orientation
+
+The default direction of motors is as follows: imagine holding the motor with
+its shaft pointing away from you. In this orientation, clockwise is the
+*positive* direction, and counter-clockwise is the *negative* direction.
+:::
+
+## Telemetry
+
+Telemetry is the SDK's live history of actuator feedback (position, torque, timestamps, and similar channels). While the
+robot runs, firmware and the comms stack push samples into ring buffers owned by the robot. You read those samples to
+inspect what the hardware is doing — without issuing a new network request for every value.
+
+### Where it lives
+
+{py:class}`~feathersdk.robot.actuators.telemetry.FeatherTelemetry` sits on the robot as `robot.global_telemetry`.
+During startup each actuator registers its channels there (typically named like `"motor_name.POSITION"`). After
+`initialize()`, those channels are fixed: each one is a fixed-capacity ring buffer with a typed dtype.
+
+Day to day you usually go through an actuator's own telemetry handle instead of the global object:
+
+```python
+motor = robot.arms_system.left_arm.shoulder_pitch  # example actuator
+telem = motor.telemetry
+params = motor.PARAMS  # enum / param set for this actuator type
+```
+
+`motor.telemetry` is an {py:class}`~feathersdk.robot.actuators.actuator.ActuatorTelemetry` wrapper. Indexing it looks up
+the right channel on `robot.global_telemetry` for that actuator.
+
+### Reading values
+
+Index with a **(parameter, index)** pair. The second item is a logical index into the ring: `0` is the oldest sample
+still retained, `-1` is the newest.
+
+```python
+# Newest torque sample (scalar)
+motor.telemetry[motor.PARAMS.FB_TORQUE, -1]
+
+# Same idea via helpers
+motor.telemetry.get_latest_value(motor.PARAMS.FB_TORQUE)
+motor.get_param(motor.PARAMS.FB_TORQUE)  # latest cached feedback value
+```
+
+If a channel has no samples yet (or the index is out of range), bare indexing raises `IndexError`. Helpers that take a
+`default=` argument return that default instead of raising when only the index is out of range.
+
+Timestamps for a parameter are stored alongside it. Use `get_latest_timestamp(...)` / `get_timestamp_at(...)` when you 
+need them.
+
+```python
+# Timestamp of newest torque sample (scalar)
+motor.telemetry.get_latest_timestamp(motor.PARAMS.FB_TORQUE)
+```
+
+### Slicing and fancy indexing
+
+The second index accepts anything a 1-d NumPy array would: integers, slices, integer arrays, and boolean masks.
+Slices return a NumPy array of the channel's dtype (a view when the requested range sits contiguously in the ring,
+otherwise a copy).
+
+```python
+# Last 15 torque samples
+motor.telemetry[motor.PARAMS.FB_TORQUE, -15:]
+
+# Every other sample among the last 20
+motor.telemetry[motor.PARAMS.FB_POSITION, -20::2]
+
+# Explicit window from oldest retained samples
+motor.telemetry[motor.PARAMS.FB_POSITION, 0:10]
+
+# Fancy / boolean index over the logical history
+motor.telemetry[motor.PARAMS.FB_TORQUE, [0, 5, -1]]
+```
+
+You can also index the global store directly with the full channel name:
+
+```python
+robot.global_telemetry["shoulder_pitch.FB_TORQUE", -1]
+robot.global_telemetry["shoulder_pitch.FB_TORQUE", -15:]
+```
+
+Prefer `actuator.telemetry[...]` in application code — it keeps parameter enums and naming consistent per actuator
+type.
+
+## Communication
+
+The SDK does not talk to motors over CAN directly from the host. Instead, the host sends commands over **Ethernet**
+to a **Teensy** board on the robot. The Teensy is the bridge to the CAN bus: it receives those Ethernet messages and
+turns them into the CAN-line traffic that reaches the motors (and related devices) on the robot.
+
+```text
+Host (Jetson / PC)
+        │  Ethernet
+        ▼
+     Teensy
+        │  CAN
+        ▼
+     Motors / devices
+```
+
+Day-to-day robot APIs (actuator systems, telemetry, and so on) go through this stack via the communications manager.
+You configure the Teensy endpoint (IP, port, rates, …) in the robot's comms config; the default path assumes a real
+Teensy 4.1 on the robot network.
+
+### CAN USB / emulated Teensy
+
+Older setups that use **CAN USB** adapters on the host (instead of a physical Teensy) are still supported. When
+`use_emulated_teensy` is enabled in the comms config, the SDK launches an **emulated Teensy** process on the host.
+That program speaks the same Ethernet protocol as the real board, but drives the attached CAN USB devices so the rest
+of the SDK can keep the same host ↔ Teensy ↔ CAN model.
+
+## ROS2
+
+The SDK does not depend on ROS 2. You can construct a {py:class}`~feathersdk.robot.robot.FeatherRobot` and command it
+from ordinary Python. When you *are* in a ROS 2 system, an in-process **wrapper node** is available: it owns a
+`FeatherRobot` and exposes that robot as ROS topics and services under `/feather`.
+
+The wrapper lives in {py:mod}`feathersdk.ros2`. Importing `feathersdk` does not load `rclpy`. Only the driver node
+(and the publishers / interfaces it creates) need a ROS environment.
+
+### What you need
+
+1. **ROS 2 Humble**, sourced (`source /opt/ros/humble/setup.bash`).
+2. **Python 3.10** — Humble's interpreter (`/usr/bin/python3.10`), not a conda env with a different Python.
+3. **`feather_msgs`**, the ament interface package next to the SDK. Build and source it from the `feathersdk/` tree:
+
+```bash
+cd /path/to/feathersdk
+colcon build --paths feather_msgs --cmake-args -DPYTHON_EXECUTABLE=/usr/bin/python3.10
+source install/setup.bash
+```
+
+:::{note}
+You can get your feathersdk path by running:
+`python3 -c "import feathersdk; from pathlib import Path; print(Path(feathersdk.__file__).parent)"`
+:::
+
+4. **FeatherSDK installed for that same Python**, so `import feathersdk` works:
+
+```bash
+/usr/bin/python3.10 -m pip install -e /path/to/feathersdk
+```
+
+`feathersdk` itself is a pip package, not an ament package. ROS dependencies (`rclpy`, `sensor_msgs`, `nav_msgs`,
+`feather_msgs`, …) come from the Humble / colcon workspace, not from pip.
+
+### Starting the node
+
+The driver calls {py:func}`~feathersdk.robot.robot.initialize_feather_system` with ROS-safe overrides so the SDK does
+not install its own signal / `atexit` handlers or kill the process on a failed abort — ROS owns process lifetime.
+
+`config_path` is optional. Omit it to load the default system robot config (the same path
+{py:func}`~feathersdk.robot.robot.initialize_feather_system` uses when called with no argument). Pass a path to use a
+specific `robot_conf.py`.
+
+Start it as a module:
+
+```bash
+/usr/bin/python3.10 -m feathersdk.ros2.driver_node
+/usr/bin/python3.10 -m feathersdk.ros2.driver_node --ros-args -p config_path:=/path/to/robot_conf.py
+```
+
+or with the console script from the editable install (`feather-ros2-driver`), or via launch:
+
+```bash
+ros2 launch /path/to/feathersdk/src/feathersdk/ros2/launch/driver.launch.py
+ros2 launch /path/to/feathersdk/src/feathersdk/ros2/launch/driver.launch.py \
+    config_path:=/path/to/robot_conf.py
+```
+
+Optional launch / ROS params: `joint_state_hz` (default 30) and `odometry_hz` (default 30). Odometry is not advertised
+if `odometry_service` is disabled in the robot config.
+
+The node publishes `/feather/joint_states` and, when odometry is enabled, `/feather/odom`. Command interfaces are
+services under `/feather/nav`, `/feather/neck`, `/feather/torso`, `/feather/arms`, `/feather/left_arm`, and
+`/feather/right_arm` (enable / disable, velocity or go-to, and arm homing / freeze / capture). Nav velocities are
+body-frame SI (`vx` / `vy` in m/s, `omega` in rad/s). **Torso heights and speeds are millimeters**, including the torso
+joint on `/feather/joint_states`.
+
+With the driver running, optional keyboard teleop is:
+
+```bash
+/usr/bin/python3.10 -m feathersdk.ros2.ros_keyboard_control
+```
