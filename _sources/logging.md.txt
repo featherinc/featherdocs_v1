@@ -1,0 +1,347 @@
+# Logging and Data Monitoring
+
+The SDK writes two kinds of on-disk history while the robot runs:
+
+* **Logging** — human-readable messages (`info(...)`, `warning(...)`, …) to the console and to rotating log files.
+* **Data monitoring** — binary recordings of telemetry, CAN traffic, Teensy messages, and performance timings.
+
+Both land under the same session directory (by default `/feathersys/logs/<timestamp>/`). Logging uses the `logs/`
+subdirectory; data monitoring uses `monitoring/`.
+
+`initialize_feather_system()` starts logging from the robot's `logging_config` (typically `infra/logging_conf.py` in
+the installed configs). You can also call {py:func}`~feathersdk.logging.init_logging` yourself in scripts and tests.
+
+## Logging
+
+Feather logging is **not** the stdlib `logging` module. Every `info(...)` / `debug(...)` call is attributed to a
+**frame**: the Python call site that produced it. Frames form a tree. You can set verbosity, tag filters, and rate
+limits on the root or on any subtree, independently for the console and the log file.
+
+The defaults are enough for day-to-day robot use. Almost everything below is optional.
+
+### Emitting messages
+
+Import the helpers from {py:mod}`feathersdk.logging`. Arguments work like `print()`:
+
+```python
+from feathersdk.logging import info, warning, error, debug, trace, notice, log_json, NOTICE
+
+info("Connected to", n, "actuators")
+warning("Battery low:", voltage)
+error("Failed to home arm", arm_name)
+
+# Structured payload (prefix `__JSON_DATA__` in the log line, for tooling)
+log_json(NOTICE, "logging_init", {"version": "0.1.7"})
+```
+
+Levels, from most verbose to most important:
+
+`TRACE` < `DEBUG` < `INFO` < `WARNING` < `ERROR` < `CRITICAL` < `NOTICE`
+
+{py:data}`~feathersdk.logging.NOTICE` is *above* critical: high-importance informational messages (startup, config),
+not a crash. {py:data}`~feathersdk.logging.DISABLE_LOGGING` is a sentinel level used to turn a sink off, not something
+you log at.
+
+Each call returns `True` if the message was accepted by at least one sink (console and/or file), `False` if it was
+filtered or throttled.
+
+Messages are buffered in memory and flushed on an interval (and at shutdown). Call
+{py:func}`~feathersdk.logging.flush_logs` if you need them on disk immediately.
+
+### How frames work
+
+When you log, the SDK records a **qualified frame name** from the stack — typically
+`module.path.function` or `module.path.Class.method`. That name is looked up in a tree of
+{py:class}`~feathersdk.logging.FrameLoggingConfig` nodes:
+
+```text
+(root)
+ ├── feathersdk
+ │    └── robot
+ │         └── comms
+ └── my_package
+      └── teleop
+```
+
+A message is allowed only if **this frame and every ancestor** accept it. Parents can only make logging *more*
+restrictive (higher level threshold, extra tag filter, tighter rate limit). That means a noisy child cannot override a
+quiet parent; you quiet a whole subtree by configuring the parent.
+
+Unknown frames are created on first use and inherit the parent's resolved config.
+
+### Frame names and Python version
+
+Frame names come from the calling code object. **Python 3.11+** has `co_qualname` (the same idea as `__qualname__` on
+functions and methods). **Python 3.9 and 3.10** only expose the bare `co_name`.
+
+| Call site | Python 3.9–3.10 | Python 3.11+ |
+| --- | --- | --- |
+| Module-level function `foo()` | `mypkg.mod.foo` | `mypkg.mod.foo` |
+| Method `Box.run()` | `mypkg.mod.run` | `mypkg.mod.Box.run` |
+| Function `nested` inside `run()` | `mypkg.mod.nested` | `mypkg.mod.Box.run.<locals>.nested` |
+| Lambda inside `foo()` | `mypkg.mod.<lambda>` | `mypkg.mod.foo.<locals>.<lambda>` |
+
+Module-level functions match on every supported Python. Class methods, nested functions, and lambdas do **not**:
+before 3.11 the class and `<locals>` path are missing, so `custom_levels` keys that include `Class.method` will not
+hit those call sites on 3.9/3.10.
+
+When you pin a frame in config, copy the name from a real log line (`pid:thread:frame` in the message prelude) on the
+Python you actually run.
+
+### What you can customize
+
+{py:class}`~feathersdk.logging.LoggingConfig` is the process-wide config. It includes the root frame settings plus
+sinks, directories, and buffers. {py:class}`~feathersdk.logging.FrameLoggingConfig` is the per-frame subset.
+
+**Per frame** (root or any `custom_levels` entry):
+
+| Field | Role |
+| --- | --- |
+| `console_level` / `file_level` | Minimum level for that sink. File is often more verbose than the console. |
+| `debug_tags` | If not disabled, a message must carry at least one of these tags. |
+| `max_rate` | Max messages/sec at this frame before dropping. `< 0` disables throttling. |
+| `leniency` | Burst factor for the throttler (allows up to about `max_rate / leniency` in a short spike). |
+
+**Process-wide** (on `LoggingConfig` only):
+
+| Field | Role |
+| --- | --- |
+| `disable_file_logging` / `disable_console_logging` | Turn a sink off entirely. |
+| `log_parent_dir` | Parent of the per-session directory (default `/feathersys/logs`). |
+| `console_out` | `"stdout"`, `"stderr"`, or a writable stream. |
+| `custom_levels` | Map of qualified frame name → `FrameLoggingConfig`. Applied in dict order. |
+| `max_log_file_size` / `max_log_directory_size` | Compress the current file, then delete oldest archives. |
+| `logging_buffer_size` / `logging_buffer_flush_interval` | In-memory buffer and flush cadence. |
+| `log_message_multiline` | Put the message body on the next line. |
+| `log_init_info` | Log a NOTICE banner at `init_logging()`. |
+
+Robot configs usually live in `infra/logging_conf.py`. A typical file-vs-console split:
+
+```python
+from feathersdk.logging import LoggingConfig, INFO, DEBUG, DISABLE_TAGS
+from feathersdk.utils.math import GB
+
+logging_config = LoggingConfig(
+    file_level=DEBUG,       # keep DEBUG on disk
+    console_level=INFO,     # quieter terminal
+    debug_tags=DISABLE_TAGS,
+    max_rate=1000.0,
+    log_parent_dir="/feathersys/logs",
+    custom_levels={},
+    max_log_file_size=1 * GB,
+    max_log_directory_size=100 * GB,
+)
+```
+
+You do not have to set every field. Unset frame fields on the root pick documented defaults (`INFO` levels, no tag
+filter, no rate limit).
+
+### `None` inherits; disable sentinels are explicit
+
+`None` on a {py:class}`~feathersdk.logging.FrameLoggingConfig` field means **inherit**, not “off”:
+
+* On init, inherit from the parent frame.
+* On a runtime update, inherit the value the node already has.
+
+That is why `debug_tags=None` does *not* mean “do not filter”. Several fields have no natural “off” value that is
+distinct from inherit, so the SDK uses explicit sentinels:
+
+| Want… | Do not use | Use |
+| --- | --- | --- |
+| Inherit this field | — | `None` (the default on `FrameLoggingConfig`) |
+| No debug-tag filter | `debug_tags=None` | {py:data}`~feathersdk.logging.DISABLE_TAGS` |
+| Silence a sink at this frame | `console_level=None` | `console_level=DISABLE_LOGGING` (same for `file_level`) |
+| No rate limit | `max_rate=None` | `max_rate=-1.0` (any value `< 0`) |
+
+Example: quiet a noisy package on the console, keep file logging, and leave rate limits to the parent:
+
+```python
+from feathersdk.logging import (
+    LoggingConfig, FrameLoggingConfig, INFO, DEBUG, WARNING, DISABLE_TAGS, DISABLE_LOGGING,
+)
+
+logging_config = LoggingConfig(
+    file_level=DEBUG,
+    console_level=INFO,
+    debug_tags=DISABLE_TAGS,
+    custom_levels={
+        # Only override console verbosity; file_level/max_rate stay None → inherit DEBUG / parent rate.
+        "feathersdk.robot.comms": FrameLoggingConfig(console_level=WARNING),
+        # Child inherits WARNING console from the comms frame unless it sets its own.
+        "feathersdk.robot.comms.comms_manager": FrameLoggingConfig(
+            console_level=None,          # inherit WARNING
+            file_level=DEBUG,            # still write DEBUG to the file
+            debug_tags=DISABLE_TAGS,     # do not inherit a tag filter if a parent added one
+        ),
+        # Drop console output for this frame; file still uses inherited/file_level.
+        "my_package.spam": FrameLoggingConfig(console_level=DISABLE_LOGGING),
+    },
+)
+```
+
+Tag filters: set `debug_tags={"can"}` on a frame, then pass `debug_tags=["can"]` on the log call. Messages without a
+matching tag are dropped at that frame (and therefore for descendants, because filtering walks parents). Use
+`DISABLE_TAGS` on a child if that subtree should *not* inherit the filter.
+
+These filters may be useful for complex debugging. EG: if you are debugging a workflow that touches many different
+parts of the code, including "noisy" parts, but you only want some specific messages to make it through and not
+overwhelm you with useless messages.
+
+### Runtime changes
+
+{py:func}`~feathersdk.logging.update_logging_frame_config` patches a frame after init. `None` fields keep the node's
+current values. `propagate=True` (the default) copies the resulting config onto existing children (`max_rate` /
+`leniency` throttlers on children are not rebuilt).
+
+```python
+from feathersdk.logging import FrameLoggingConfig, DEBUG, update_logging_frame_config
+
+update_logging_frame_config(
+    "feathersdk.robot.comms",
+    FrameLoggingConfig(console_level=DEBUG),
+    propagate=True,
+)
+```
+
+{py:class}`~feathersdk.logging.logging_override` is a context manager **and** decorator for a temporary change. It
+defaults to the root frame; pass `name=` for a subtree. `propagate=False` (the default) only edits that node — parents
+still filter descendants when they walk up. `propagate=True` also rewrites existing children, then restores them on
+exit.
+
+```python
+from feathersdk.logging import logging_override, ERROR, DEBUG, info
+
+with logging_override(console_level=ERROR, file_level=ERROR):
+    info("hidden on console and file unless ERROR+")  # filtered at root
+
+with logging_override(name="feathersdk.robot.comms", console_level=DEBUG, propagate=True):
+    ...  # comms subtree more verbose until the block ends
+
+@logging_override(console_level=ERROR, name="my_package.teleop")
+def calibrate():
+    ...
+```
+
+## Data monitoring
+
+Data monitoring is a **debug / logging aid**, not a dataset pipeline. It records extra robot activity next to the
+text logs so you can reconstruct a session after the fact (a spike in loop time, a CAN burst, a Teensy command that
+failed). It is **not** meant for collecting training data or any other complete archive: streams can be sampled,
+files rotate, and old recordings are deleted when a size cap is hit. Treat anything on disk as a bounded rolling
+window, not a guaranteed full history.
+
+When the
+{py:class}`~feathersdk.robot.services.data_monitor_service.DataMonitorService` is enabled, it is
+`robot.data_monitor_service`. Recordings go under the same session directory as text logs, in `monitoring/`
+(for example `/feathersys/logs/<timestamp>/monitoring/`). Each kind of monitor gets its own subdirectory.
+
+To read a session later, use the [log parsing](log_parsing.md) tools.
+
+### What is recorded
+
+Four monitors ship with the service. Each can be turned on or off independently; all default to on.
+
+| Monitor | Config flag | What it captures |
+| --- | --- | --- |
+| Performance | `perfmon_enabled` | Function timings from {py:func}`~feathersdk.robot.services.data_monitor_service.perftime` (and manual inserts). |
+| Candump | `candump_enabled` | CAN frames the Teensy reports (bus, id, payload, timestamp). |
+| Telemetry | `telemetry_enabled` | Actuator telemetry batches as they are applied on the host. |
+| Teensy messages | `teensy_message_enabled` | Host↔Teensy Ethernet commands and responses. |
+
+Disable the **whole service** by setting `data_monitor_service_config=None` on the robot config (same pattern as other
+modules). Disable **one stream** with its `*_enabled` flag:
+
+```python
+from feathersdk.robot.services import DataMonitorServiceConfig
+from feathersdk.utils.math import MB, GB
+
+data_monitor_service_config = DataMonitorServiceConfig(
+    perfmon_enabled=True,
+    candump_enabled=True,
+    telemetry_enabled=False,          # skip telemetry recordings
+    teensy_message_enabled=False,     # skip host↔board message recordings
+    candump_max_file_size=100 * MB,
+    candump_max_total_size=1 * GB,
+)
+```
+
+Robot configs typically live in `infra/data_monitor_service_conf.py`.
+
+### Size caps, rotation, and deletion
+
+Every monitor is bounded so a long-running robot cannot fill the disk.
+
+* **Text logs** (see above) gzip the current file when it exceeds `max_log_file_size`, then delete the oldest
+  compressed archives if the log directory exceeds `max_log_directory_size`.
+* **Each monitoring writer** starts a new file when the current one exceeds that monitor's `*_max_file_size`, and
+  deletes the oldest files **it created** when its directory exceeds `*_max_total_size`. The file currently being
+  written is never deleted.
+
+Size checks run at `*_op_freq` (default 1 Hz), so the caps are not instantaneous. A busy stream can briefly overshoot
+before the next check.
+
+These limits are why monitoring is a debug tool: if you need an unbroken recording for training or offboard analysis,
+this service will not promise that.
+
+### Timing functions with `perftime`
+
+{py:func}`~feathersdk.robot.services.data_monitor_service.perftime` is a decorator that records how long a call took
+(monotonic time). Pass `prefix=` to namespace the event (`"<prefix>.<func_name>"`). `sample_rate` in `[0, 1]` is the
+fraction of calls that are timed (`1.0` times every call). Hot paths in the SDK often use a low sample rate.
+
+Timings are written to the performance monitor **only if** the data monitor service is running with
+`perfmon_enabled=True`. If perfmon is off, the decorator still runs your function; it just does not record.
+
+```python
+from feathersdk.robot.services import perftime, perftime_insert
+
+@perftime(prefix="MyController")
+def step(self) -> None:
+    ...
+
+@perftime(prefix="MyController", sample_rate=0.1)  # time ~10% of calls
+def hot_path(self) -> None:
+    ...
+
+# Manual sample when a decorator does not fit:
+perftime_insert("MyController.custom_wait", duration_s)
+```
+
+{py:func}`~feathersdk.robot.services.data_monitor_service.perftime_insert` records an already-measured duration.
+The optional timestamp defaults to now.
+
+### Writing your own monitors
+
+The built-in streams are subclasses of
+{py:class}`~feathersdk.robot.services.data_monitor_service.MonitorBinaryFileWriter`. You can use that base class for
+custom debug recordings: it owns a directory, rolls files at `max_file_size`, and deletes its oldest files at
+`max_total_size`.
+
+Subclass it, pack whatever payload you want in your own `write_*` method, and call `write(bytes)`:
+
+```python
+from pathlib import Path
+from feathersdk.robot.services.data_monitor_service import MonitorBinaryFileWriter
+from feathersdk.utils.math import MB, GB
+
+class CounterWriter(MonitorBinaryFileWriter):
+    def record(self, n: int) -> None:
+        self.write(n.to_bytes(8, "little"))
+
+writer = CounterWriter(
+    monitor_dir=Path("/tmp/my_monitor"),
+    max_file_size=100 * MB,
+    max_total_size=1 * GB,
+    op_freq=1.0,
+)
+writer.record(42)
+# ... later, on shutdown:
+writer.abort()
+```
+
+Only files this writer created are eligible for deletion. Abort the writer when the robot (or your script) shuts down
+so the current file is closed cleanly.
+
+To inspect recordings — built-in or custom — use the [log parsing](log_parsing.md) tools rather than reading the files
+by hand.
+

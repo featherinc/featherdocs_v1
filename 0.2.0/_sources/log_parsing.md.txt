@@ -1,0 +1,5 @@
+# Log parsing
+
+Documentation for the log and data-monitor parsing tools is not written yet.
+
+Those tools read session directories produced by [logging and data monitoring](logging.md).

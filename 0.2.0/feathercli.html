@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="feathersdk Package" href="api/feathersdk.html"><link rel="prev" title="Overview" href="overview.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Logging and Data Monitoring" href="logging.html"><link rel="prev" title="Overview" href="overview.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
         <title>FeatherCLI - Feather SDK 0.2.0</title>
@@ -200,6 +200,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">FeatherCLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -334,6 +336,14 @@ feathercli<span class="w"> </span>install<span class="w"> </span>--verify
 <p><code class="docutils literal notranslate"><span class="pre">YOUR_VERSION</span></code> must match a bundled config set (for example <code class="docutils literal notranslate"><span class="pre">v0.5.1</span></code>). The available values are the directory names
 under the SDK’s <code class="docutils literal notranslate"><span class="pre">configs/user_configs/</span></code> package data; <code class="docutils literal notranslate"><span class="pre">feathercli</span> <span class="pre">install</span> <span class="pre">--help</span></code> lists the current choices.</p>
 <p>This requires <code class="docutils literal notranslate"><span class="pre">sudo</span></code> privelages when installing certain files/packages.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">feathersdk</span></code> is not installed in your system /usr/bin/python environment, <code class="docutils literal notranslate"><span class="pre">sudo</span></code> won’t be able to find the correct
+<code class="docutils literal notranslate"><span class="pre">feathercli</span></code>. You would instead need to activate your environment you wish to use and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-E<span class="w"> </span><span class="k">$(</span>which<span class="w"> </span>feathercli<span class="k">)</span><span class="w"> </span>install<span class="w"> </span>--all<span class="w"> </span>-v<span class="w"> </span>YOUR_VERSION
+</pre></div>
+</div>
+</div>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -518,12 +528,12 @@ feathercli<span class="w"> </span>example<span class="w"> </span>-o<span class="
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="api/feathersdk.html">
+          <a class="next-page" href="logging.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">feathersdk Package</div>
+                <div class="title">Logging and Data Monitoring</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

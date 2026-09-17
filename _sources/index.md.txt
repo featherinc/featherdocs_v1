@@ -24,10 +24,19 @@ feathercli install --verify
 
 You can install system files using:
 ```bash
-feathercli install --all -v YOUR_VERSION
+sudo feathercli install --all -v YOUR_VERSION
 ```
 
 Where `YOUR_VERSION` is the version of the Feather robot you have, eg: "v0.5.1".
+
+:::{note}
+If `feathersdk` is not installed in your system /usr/bin/python environment, `sudo` won't be able to find the correct
+`feathercli`. You would instead need to activate your environment you wish to use and run:
+
+```bash
+sudo -E $(which feathercli) install --all -v YOUR_VERSION
+```
+:::
 
 :::{note}
 We only support Python 3.9+ for full `feathersdk` usage, however you should be able to pip-install and use
@@ -87,6 +96,8 @@ Anything not present in your config is `None`, so only the systems and services 
 
 overview
 feathercli
+logging
+log_parsing
 ```
 
 ## API Reference

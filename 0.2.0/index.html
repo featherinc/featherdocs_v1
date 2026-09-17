@@ -200,6 +200,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="feathercli.html">FeatherCLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -338,10 +340,18 @@ For how the robot object and its modules fit together, see <a class="reference i
 </pre></div>
 </div>
 <p>You can install system files using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>feathercli<span class="w"> </span>install<span class="w"> </span>--all<span class="w"> </span>-v<span class="w"> </span>YOUR_VERSION
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>feathercli<span class="w"> </span>install<span class="w"> </span>--all<span class="w"> </span>-v<span class="w"> </span>YOUR_VERSION
 </pre></div>
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">YOUR_VERSION</span></code> is the version of the Feather robot you have, eg: “v0.5.1”.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">feathersdk</span></code> is not installed in your system /usr/bin/python environment, <code class="docutils literal notranslate"><span class="pre">sudo</span></code> won’t be able to find the correct
+<code class="docutils literal notranslate"><span class="pre">feathercli</span></code>. You would instead need to activate your environment you wish to use and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-E<span class="w"> </span><span class="k">$(</span>which<span class="w"> </span>feathercli<span class="k">)</span><span class="w"> </span>install<span class="w"> </span>--all<span class="w"> </span>-v<span class="w"> </span>YOUR_VERSION
+</pre></div>
+</div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We only support Python 3.9+ for full <code class="docutils literal notranslate"><span class="pre">feathersdk</span></code> usage, however you should be able to pip-install and use
@@ -398,6 +408,8 @@ a system in <code class="docutils literal notranslate"><span class="pre">Feather
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="feathercli.html">FeatherCLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>
 </ul>
 </div>
 </section>

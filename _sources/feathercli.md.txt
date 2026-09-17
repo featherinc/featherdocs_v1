@@ -21,6 +21,15 @@ under the SDK's `configs/user_configs/` package data; `feathercli install --help
 
 This requires `sudo` privelages when installing certain files/packages.
 
+:::{note}
+If `feathersdk` is not installed in your system /usr/bin/python environment, `sudo` won't be able to find the correct
+`feathercli`. You would instead need to activate your environment you wish to use and run:
+
+```bash
+sudo -E $(which feathercli) install --all -v YOUR_VERSION
+```
+:::
+
 | Flag | Description |
 | --- | --- |
 | `-a`, `--all` | Install everything currently provided by this command (the versioned configs). |
