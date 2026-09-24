@@ -1,7 +1,7 @@
 # FeatherCLI
 
-`feathercli` is the command-line tool installed with the Feather SDK. Use it to install robot configs onto the machine, 
-teleoperate the robot, and more.
+`feathercli` is the command-line tool installed with the Feather SDK. Use it to install the robot onto the machine,
+configure the Teensy ethernet link, scan and flash motors, teleoperate, and copy the example notebook.
 
 Run `feathercli --help` (or `feathercli <command> --help`) for the live flag list.
 
@@ -9,7 +9,7 @@ Run `feathercli --help` (or `feathercli <command> --help`) for the live flag lis
 
 ### --> `feathercli install`
 
-Copy versioned robot configs onto the machine, or verify that a previous install looks correct.
+Install Feather onto the machine, or verify that a previous install looks correct. `--all` copies the versioned configs, installs conda and the required apt packages, and configures the Teensy ethernet link.
 
 ```bash
 sudo feathercli install --all -v YOUR_VERSION
@@ -30,13 +30,25 @@ sudo -E $(which feathercli) install --all -v YOUR_VERSION
 ```
 :::
 
+`--all` turns on every install step. Each step also has its own flag, and a matching `--no-install-*` flag turns that 
+step back off even when `--all` is set. Passing both the enable flag and its `--no-install-*` pair is an error. With 
+no step flags, the command installs nothing.
+
 | Flag | Description |
 | --- | --- |
-| `-a`, `--all` | Install everything currently provided by this command (the versioned configs). |
-| `-c`, `--configs` | Install the configs. |
+| `-a`, `--all` | Install configs, conda, system packages, and the Teensy ethernet link. |
+| `-c`, `--configs` | Copy the versioned robot configs. Required unless you pass `--all`. |
+| `--no-install-configs` | Skip copying configs, including when `--all` is set. |
 | `-v`, `--version` | Robot revision to install. Required when installing configs. |
 | `-o`, `--output` | Root directory to install into. Defaults to `/feathersys`. |
 | `-f`, `--force` | Overwrite an existing configs directory. Without this flag, an existing destination raises an error. |
+| `--install-conda` | Install Archiconda for the login user if it is not already present, and source `conda.sh` from `.bashrc`. |
+| `--no-install-conda` | Skip the conda install, including when `--all` is set. |
+| `--install-system-packages` | Install missing apt packages `make` and `libnss-mdns`. |
+| `--no-install-system-packages` | Skip system packages, including when `--all` is set. |
+| `--install-setup-ethernet` | Configure the Jetson ethernet link to the Teensy. Same behavior as `feathercli setup-ethernet`. |
+| `--no-install-setup-ethernet` | Skip ethernet setup, including when `--all` is set. |
+| `--setup-ethernet-method` | `static` or `dhcp`. Default: dhcp if a DHCP server answers, otherwise static `192.168.10.1/24`. |
 | `--verify` | Check that the install looks correct. Does not copy or overwrite anything. |
 
 `--verify` confirms that:
@@ -133,3 +145,82 @@ feathercli example -o ./my_notebook.ipynb
 | Flag | Description |
 | --- | --- |
 | `-o`, `--output` | Destination path. Defaults to `./feathersdk_example.ipynb`. If the path is an existing directory, the notebook is copied into it with the same filename. |
+
+---
+
+### --> `feathercli setup-ethernet`
+
+Configure the Jetson ethernet NIC used to reach the Teensy. This is the same step 
+`feathercli install --install-setup-ethernet` runs.
+
+There are two main configurations for the teensy ethernet connection: `static` (meaning the teensy is connected directly
+to the jetson, or through a pure ethernet switch), and `dynamic` (meaning both teensy and jetson are connected to
+a router/something providing dhcp service).
+
+```bash
+feathercli setup-ethernet
+feathercli setup-ethernet static
+feathercli setup-ethernet dhcp
+```
+
+With no method, the command probes the ethernet port. A DHCP lease selects `dhcp`. No answer selects `static` 
+(`192.168.10.1/24`). Auto-detect requires exactly one ethernet NIC; pass `static` or `dhcp` when there are several.
+
+| Argument | Description |
+| --- | --- |
+| `method` | Optional. `static` or `dhcp`. |
+
+If you wish to switch from one method of ethernet connection to another, you will have to run this cli command to
+update the jetson ethernet interface appropriately.
+
+---
+
+### --> `feathercli scancan`
+
+Scan the Teensy CAN buses for motors. Each id in `[1, MAX_NUM_ACTUATORS)` is initialized, then probed. A motor counts 
+as present when its reply moves that parameter's telemetry timestamp.
+
+By default this scans Robstride motors (`LIMIT_TORQUE`) and EZMotion motors (`POSITION`). The two motor types are 
+scanned in separate processes.
+
+```bash
+feathercli scancan
+feathercli scancan can0 can2
+feathercli scancan --only-robstride --attempts 3
+```
+
+Bus names are Teensy bus indexes (`can0`, `can1`, `vcan0`), not host SocketCAN device names.
+
+| Flag | Description |
+| --- | --- |
+| `IFACE` | Optional bus names. Default: every bus the Teensy reports. |
+| `-c`, `--configs` | Robot config path. Defaults to the system robot config. |
+| `--only-robstride` | Scan Robstride motors only. |
+| `--only-ezmotion` | Scan EZMotion motors only. Mutually exclusive with `--only-robstride`. |
+| `--delay` | Seconds between transmit frames. Default: `0.002`. |
+| `--wait` | Seconds to wait for replies after a probe burst. Default: `0.05`. |
+| `--attempts` | Probe attempts per bus. Default: `1`. |
+
+---
+
+### --> `feathercli flash-motor`
+
+Download the known-good Robstride firmware bins (if they are not already cached) and flash every Robstride motor found 
+on the Teensy CAN buses, or only the ids you list. EZMotion motors found by the scan are left alone.
+
+Bins are cached under `~/.cache/feathersdk/rob_bins`. A motor whose version already matches that file is 
+skipped unless you pass `--force`.
+
+```bash
+feathercli flash-motor
+feathercli flash-motor 3 0x15
+feathercli flash-motor --force --progress=False
+feathercli flash-motor -c /path/to/robot_config.py
+```
+
+| Flag | Description |
+| --- | --- |
+| `ID` | Optional motor ids, decimal or hex. Default: every Robstride motor that answers. Ids must be in `[1, MAX_NUM_ACTUATORS)`. |
+| `--force` | Flash even when the motor already has this firmware version. |
+| `--progress` | `True` or `False`. Show a progress bar while sending firmware packets. Default: `True`. |
+| `-c`, `--configs` | Robot config path. Defaults to the system robot config. |

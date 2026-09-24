@@ -12,6 +12,9 @@
 
 feathersdk.cli.cli.md
 feathersdk.cli.install.md
+feathersdk.cli.setup_ethernet.md
+feathersdk.cli.scan_all_can_ids.md
+feathersdk.cli.flash_motor.md
 ```
 
 ## Subpackages

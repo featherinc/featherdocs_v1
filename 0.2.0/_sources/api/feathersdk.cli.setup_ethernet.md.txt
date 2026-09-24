@@ -1,0 +1,6 @@
+# feathersdk.cli.setup_ethernet Module
+
+```{eval-rst}
+.. automodule:: feathersdk.cli.setup_ethernet
+   :show-inheritance:
+```

@@ -197,6 +197,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>
@@ -207,6 +208,9 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="api/feathersdk.cli.html">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="api/feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -332,6 +336,12 @@
 </li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.ActuatorNotFoundError">ActuatorNotFoundError</a>
 </li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig.actuators">actuators (feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig attribute)</a>
+
+        <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig.actuators">(feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig attribute)</a>
+</li>
+        </ul></li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobot.actuators_by_id">actuators_by_id (feathersdk.robot.robot.FeatherRobot attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem.actuators_by_name">actuators_by_name (feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem property)</a>
@@ -352,10 +362,16 @@
 </li>
         <li><a href="api/feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.ActuatorTelemetry">ActuatorTelemetry (class in feathersdk.robot.actuators.actuator)</a>
 </li>
-        <li><a href="api/feathersdk.robot.actuators.telemetry.html#feathersdk.robot.actuators.telemetry.FeatherTelemetry.add_telemetry">add_telemetry() (feathersdk.robot.actuators.telemetry.FeatherTelemetry method)</a>
+        <li><a href="api/feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.add_arguments">add_arguments() (in module feathersdk.cli.flash_motor)</a>
+
+        <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.add_arguments">(in module feathersdk.cli.scan_all_can_ids)</a>
 </li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/feathersdk.robot.actuators.telemetry.html#feathersdk.robot.actuators.telemetry.FeatherTelemetry.add_telemetry">add_telemetry() (feathersdk.robot.actuators.telemetry.FeatherTelemetry method)</a>
+</li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets.additional_torque">additional_torque (feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.calibrate.html#feathersdk.robot.actuators.robstride.calibrate.RobstrideCalibrationConfig.allow_load_calibration">allow_load_calibration (feathersdk.robot.actuators.robstride.calibrate.RobstrideCalibrationConfig attribute)</a>
@@ -373,6 +389,8 @@
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobot.arms_system">arms_system (feathersdk.robot.robot.FeatherRobot attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.arms_system_config">arms_system_config (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode">ArmsControlMode (class in feathersdk.robot.actuator_systems.arms_system)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsSystem">ArmsSystem (class in feathersdk.robot.actuator_systems.arms_system)</a>
 </li>
@@ -490,8 +508,6 @@
 </li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManager.cansend">cansend() (feathersdk.robot.comms.comms_manager.CommsManager method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.capture_image">capture_image() (feathersdk.robot.services.camera_service.ZedCameraService method)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.capture_position">capture_position() (feathersdk.robot.actuator_systems.arms_system.ArmsSystem method)</a>
@@ -502,13 +518,13 @@
         </ul></li>
         <li><a href="api/feathersdk.robot.urdf_loader.html#feathersdk.robot.urdf_loader.WheelGeometry.center">center (feathersdk.robot.urdf_loader.WheelGeometry attribute)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/feathersdk.robot.instance_lock.html#feathersdk.robot.instance_lock.check_still_own_lock">check_still_own_lock() (in module feathersdk.robot.instance_lock)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.Actuator.check_warn_on_feedback_delay">check_warn_on_feedback_delay() (feathersdk.robot.actuators.actuator.Actuator method)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.CHECKED_PARAM_TOLERANCE">CHECKED_PARAM_TOLERANCE (in module feathersdk.robot.actuators.robstride.robstride_motor)</a>
-</li>
-        <li><a href="api/feathersdk.cli.install.html#feathersdk.cli.install.chmod_tree">chmod_tree() (in module feathersdk.cli.install)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.clean_parameters">clean_parameters() (feathersdk.robot.actuator_systems.arms_system.Robstride7MArm method)</a>
 </li>
@@ -544,6 +560,8 @@
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.params.html#feathersdk.robot.actuators.robstride.params.RobstrideMotorError.CPhaseOvercurrent">CPhaseOvercurrent (feathersdk.robot.actuators.robstride.params.RobstrideMotorError attribute)</a>
 </li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.create_custom_robot">create_custom_robot() (in module feathersdk.cli.scan_all_can_ids)</a>
+</li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets.curr_acceleration">curr_acceleration (feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets.curr_position">curr_position (feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets attribute)</a>
@@ -551,6 +569,22 @@
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets.curr_velocity">curr_velocity (feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.realhand.realhand.html#feathersdk.robot.actuators.realhand.realhand.RealHandParamSet.current">current (feathersdk.robot.actuators.realhand.realhand.RealHandParamSet attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.custom_actuator_system_configs">custom_actuator_system_configs (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobot.custom_actuator_systems">custom_actuator_systems (feathersdk.robot.robot.FeatherRobot attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.custom_robot_module_configs">custom_robot_module_configs (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobot.custom_robot_modules">custom_robot_modules (feathersdk.robot.robot.FeatherRobot attribute)</a>
+</li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystem">CustomEZMotionActuatorSystem (class in feathersdk.cli.scan_all_can_ids)</a>
+</li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig">CustomEZMotionActuatorSystemConfig (class in feathersdk.cli.scan_all_can_ids)</a>
+</li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystem">CustomRobstrideActuatorSystem (class in feathersdk.cli.scan_all_can_ids)</a>
+</li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig">CustomRobstrideActuatorSystemConfig (class in feathersdk.cli.scan_all_can_ids)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -608,6 +642,8 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.download_rob_bins">download_rob_bins() (in module feathersdk.cli.flash_motor)</a>
+</li>
         <li><a href="api/feathersdk.robot.actuator_systems.navigation_system.html#feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem.drive_center_motor">drive_center_motor (feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem attribute)</a>
 
         <ul>
@@ -750,10 +786,31 @@
 </li>
         </ul></li>
         <li>
+    feathersdk.cli.flash_motor
+
+        <ul>
+          <li><a href="api/feathersdk.cli.flash_motor.html#module-feathersdk.cli.flash_motor">module</a>
+</li>
+        </ul></li>
+        <li>
     feathersdk.cli.install
 
         <ul>
           <li><a href="api/feathersdk.cli.install.html#module-feathersdk.cli.install">module</a>
+</li>
+        </ul></li>
+        <li>
+    feathersdk.cli.scan_all_can_ids
+
+        <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#module-feathersdk.cli.scan_all_can_ids">module</a>
+</li>
+        </ul></li>
+        <li>
+    feathersdk.cli.setup_ethernet
+
+        <ul>
+          <li><a href="api/feathersdk.cli.setup_ethernet.html#module-feathersdk.cli.setup_ethernet">module</a>
 </li>
         </ul></li>
         <li>
@@ -868,6 +925,8 @@
           <li><a href="api/feathersdk.robot.actuators.ezmotion.html#module-feathersdk.robot.actuators.ezmotion">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     feathersdk.robot.actuators.ezmotion.ezmotion
 
@@ -882,8 +941,6 @@
           <li><a href="api/feathersdk.robot.actuators.motor.html#module-feathersdk.robot.actuators.motor">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     feathersdk.robot.actuators.realhand
 
@@ -1076,6 +1133,8 @@
           <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor.get_errors">(feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor method)</a>
 </li>
         </ul></li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor.get_firmware_version">get_firmware_version() (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor method)</a>
+</li>
         <li><a href="api/feathersdk.robot.actuator_systems.torso_system.html#feathersdk.robot.actuator_systems.torso_system.LinearEZMotionTorsoSystem.get_height">get_height() (feathersdk.robot.actuator_systems.torso_system.LinearEZMotionTorsoSystem method)</a>
 </li>
         <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.get_imu_angular_velocity">get_imu_angular_velocity() (feathersdk.robot.services.camera_service.ZedCameraService method)</a>
@@ -1096,14 +1155,14 @@
 </li>
         <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.PerfmonDataWriter.get_perftime_event_idx">get_perftime_event_idx() (feathersdk.robot.services.data_monitor_service.PerfmonDataWriter method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/feathersdk.robot.services.imu_odometry_service.html#feathersdk.robot.services.imu_odometry_service.IMUOdometryService.get_pose">get_pose() (feathersdk.robot.services.imu_odometry_service.IMUOdometryService method)</a>
 
         <ul>
           <li><a href="api/feathersdk.robot.services.wheel_odometry_service.html#feathersdk.robot.services.wheel_odometry_service.WheelOdometryService.get_pose">(feathersdk.robot.services.wheel_odometry_service.WheelOdometryService method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/feathersdk.robot.instance_lock.html#feathersdk.robot.instance_lock.get_robot_instance_lock">get_robot_instance_lock() (in module feathersdk.robot.instance_lock)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.navigation_system.html#feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem.get_strict_directions">get_strict_directions() (feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem method)</a>
@@ -1204,6 +1263,24 @@
         </ul></li>
         <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.image">image (feathersdk.robot.services.camera_service.ZedCameraService attribute)</a>
 </li>
+        <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Impedance">Impedance (feathersdk.robot.actuator_systems.arms_system.ArmsControlMode attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_kd">impedance_kd (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_kp">impedance_kp (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_position_d_filter">impedance_position_d_filter (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_position_delta_update">impedance_position_delta_update (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_position_filt_torque_alpha">impedance_position_filt_torque_alpha (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_position_max_offset">impedance_position_max_offset (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.impedance_position_min_torque">impedance_position_min_torque (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/feathersdk.robot.services.imu_odometry_service.html#feathersdk.robot.services.imu_odometry_service.IMUOdometryService">IMUOdometryService (class in feathersdk.robot.services.imu_odometry_service)</a>
 </li>
         <li><a href="api/feathersdk.robot.services.imu_odometry_service.html#feathersdk.robot.services.imu_odometry_service.IMUOdometryServiceConfig">IMUOdometryServiceConfig (class in feathersdk.robot.services.imu_odometry_service)</a>
@@ -1212,8 +1289,6 @@
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.IncompatibleRobstrideMotorModeError">IncompatibleRobstrideMotorModeError</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.init_params">init_params (feathersdk.robot.services.camera_service.ZedCameraService attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.telemetry.html#feathersdk.robot.actuators.telemetry.FeatherTelemetry.initialize">initialize() (feathersdk.robot.actuators.telemetry.FeatherTelemetry method)</a>
@@ -1307,7 +1382,13 @@
         <li><a href="api/feathersdk.robot.actuators.robstride.params.html#feathersdk.robot.actuators.robstride.params.RobstrideMotorError.MagneticEncoding">MagneticEncoding (feathersdk.robot.actuators.robstride.params.RobstrideMotorError attribute)</a>
 </li>
         <li><a href="api/feathersdk.cli.cli.html#feathersdk.cli.cli.main">main() (in module feathersdk.cli.cli)</a>
+
+        <ul>
+          <li><a href="api/feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.main">(in module feathersdk.cli.flash_motor)</a>
 </li>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.main">(in module feathersdk.cli.scan_all_can_ids)</a>
+</li>
+        </ul></li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobot.manipulation_system">manipulation_system (feathersdk.robot.robot.FeatherRobot attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.manipulation_system_config">manipulation_system_config (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
@@ -1366,9 +1447,13 @@
 </li>
         <li><a href="api/feathersdk.robot.actuators.realhand.realhand.html#feathersdk.robot.actuators.realhand.realhand.RealHandParam.mode">mode (feathersdk.robot.actuators.realhand.realhand.RealHandParam attribute)</a>
 </li>
-        <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig.model_config">model_config (feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig attribute)</a>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig.model_config">model_config (feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig attribute)</a>
 
         <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig.model_config">(feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig attribute)</a>
+</li>
+          <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig.model_config">(feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig attribute)</a>
+</li>
           <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.model_config">(feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig attribute)</a>
 </li>
           <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.model_config">(feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig attribute)</a>
@@ -1444,7 +1529,13 @@
 </li>
           <li><a href="api/feathersdk.cli.example.html#module-feathersdk.cli.example">feathersdk.cli.example</a>
 </li>
+          <li><a href="api/feathersdk.cli.flash_motor.html#module-feathersdk.cli.flash_motor">feathersdk.cli.flash_motor</a>
+</li>
           <li><a href="api/feathersdk.cli.install.html#module-feathersdk.cli.install">feathersdk.cli.install</a>
+</li>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#module-feathersdk.cli.scan_all_can_ids">feathersdk.cli.scan_all_can_ids</a>
+</li>
+          <li><a href="api/feathersdk.cli.setup_ethernet.html#module-feathersdk.cli.setup_ethernet">feathersdk.cli.setup_ethernet</a>
 </li>
           <li><a href="api/feathersdk.configs.html#module-feathersdk.configs">feathersdk.configs</a>
 </li>
@@ -1529,9 +1620,13 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig.module_name">module_name (feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig attribute)</a>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig.module_name">module_name (feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig attribute)</a>
 
         <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig.module_name">(feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig attribute)</a>
+</li>
+          <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig.module_name">(feathersdk.robot.actuator_systems.actuator_system.ActuatorSystemConfig attribute)</a>
+</li>
           <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig.module_name">(feathersdk.robot.actuator_systems.arms_system.ArmsSystemConfig attribute)</a>
 </li>
           <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.module_name">(feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig attribute)</a>
@@ -1707,6 +1802,12 @@
           <li><a href="api/feathersdk.robot.services.battery_service.html#feathersdk.robot.services.battery_service.BatteryTelemetry.PARAMS">(feathersdk.robot.services.battery_service.BatteryTelemetry attribute)</a>
 </li>
         </ul></li>
+        <li><a href="api/feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.parse_args">parse_args() (in module feathersdk.cli.flash_motor)</a>
+
+        <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.parse_args">(in module feathersdk.cli.scan_all_can_ids)</a>
+</li>
+        </ul></li>
         <li><a href="api/feathersdk.robot.actuators.robstride.params.html#feathersdk.robot.actuators.robstride.params.RobstrideMotorError.parse_fault_feedback_errors">parse_fault_feedback_errors() (feathersdk.robot.actuators.robstride.params.RobstrideMotorError static method)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.params.html#feathersdk.robot.actuators.robstride.params.RobstrideMotorError.parse_motor_feedback_errors">parse_motor_feedback_errors() (feathersdk.robot.actuators.robstride.params.RobstrideMotorError static method)</a>
@@ -1717,10 +1818,10 @@
 </li>
         <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.perfmon_max_size">perfmon_max_size (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
 </li>
-        <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.perfmon_max_total_size">perfmon_max_total_size (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.perfmon_max_total_size">perfmon_max_total_size (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
+</li>
         <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.perfmon_op_freq">perfmon_op_freq (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.PerfmonDataWriter">PerfmonDataWriter (class in feathersdk.robot.services.data_monitor_service)</a>
@@ -1755,6 +1856,8 @@
         </ul></li>
         <li><a href="api/feathersdk.robot.actuators.robstride.params.html#feathersdk.robot.actuators.robstride.params.RobstrideMotorError.PositionInitializationFault">PositionInitializationFault (feathersdk.robot.actuators.robstride.params.RobstrideMotorError attribute)</a>
 </li>
+        <li><a href="api/feathersdk.cli.html#feathersdk.cli.print_cli">print_cli() (in module feathersdk.cli)</a>
+</li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManagerConfig.processing_toggle_timeout">processing_toggle_timeout (feathersdk.robot.comms.comms_manager.CommsManagerConfig attribute)</a>
 </li>
     </ul></td>
@@ -1769,7 +1872,9 @@
 </li>
         <li><a href="api/feathersdk.robot.urdf_loader.html#feathersdk.robot.urdf_loader.WheelGeometry.radius">radius (feathersdk.robot.urdf_loader.WheelGeometry attribute)</a>
 </li>
-        <li><a href="api/feathersdk.robot.actuators.robstride.admin.html#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.read_firmware_version">read_firmware_version() (feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl method)</a>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor.read_device_id">read_device_id() (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor method)</a>
+</li>
+        <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor.read_firmware_version">read_firmware_version() (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor method)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor.read_param">read_param() (feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor method)</a>
 
@@ -1799,9 +1904,13 @@
 </li>
         <li><a href="api/feathersdk.robot.actuators.realhand.realhand.html#feathersdk.robot.actuators.realhand.realhand.RealHandVersion">RealHandVersion (class in feathersdk.robot.actuators.realhand.realhand)</a>
 </li>
-        <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem.recalibrate">recalibrate() (feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem method)</a>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystem.recalibrate">recalibrate() (feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystem method)</a>
 
         <ul>
+          <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystem.recalibrate">(feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystem method)</a>
+</li>
+          <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem.recalibrate">(feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem method)</a>
+</li>
           <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.recalibrate">(feathersdk.robot.actuator_systems.arms_system.ArmsSystem method)</a>
 </li>
           <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.recalibrate">(feathersdk.robot.actuator_systems.arms_system.Robstride7MArm method)</a>
@@ -1839,10 +1948,10 @@
           <li><a href="api/feathersdk.robot.services.wheel_odometry_service.html#feathersdk.robot.services.wheel_odometry_service.WheelOdometryService.reset">(feathersdk.robot.services.wheel_odometry_service.WheelOdometryService method)</a>
 </li>
         </ul></li>
-        <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.reset_camera">reset_camera() (feathersdk.robot.services.camera_service.ZedCameraService method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.reset_camera">reset_camera() (feathersdk.robot.services.camera_service.ZedCameraService method)</a>
+</li>
         <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor.reset_faults">reset_faults() (feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor method)</a>
 </li>
         <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraServiceConfig.resolution">resolution (feathersdk.robot.services.camera_service.ZedCameraServiceConfig attribute)</a>
@@ -1909,6 +2018,10 @@
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.navigation_system.html#feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystemConfig.rotation_tolerance">rotation_tolerance (feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystemConfig attribute)</a>
 </li>
+        <li><a href="api/feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.run_flash_motor">run_flash_motor() (in module feathersdk.cli.flash_motor)</a>
+</li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.run_scancan">run_scancan() (in module feathersdk.cli.scan_all_can_ids)</a>
+</li>
         <li><a href="api/feathersdk.robot.services.camera_service.html#feathersdk.robot.services.camera_service.ZedCameraService.runtime_params">runtime_params (feathersdk.robot.services.camera_service.ZedCameraService attribute)</a>
 </li>
         <li><a href="api/feathersdk.cli.control.ps4.html#feathersdk.cli.control.ps4.AxisMap.rx">rx (feathersdk.cli.control.ps4.AxisMap attribute)</a>
@@ -1933,6 +2046,8 @@
         </ul></li>
         <li><a href="api/feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.SafeStopPolicy">SafeStopPolicy (class in feathersdk.robot.actuator_systems.actuator_system)</a>
 </li>
+        <li><a href="api/feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.scan_the_can">scan_the_can() (in module feathersdk.cli.scan_all_can_ids)</a>
+</li>
         <li><a href="api/feathersdk.robot.services.wheel_odometry_service.html#feathersdk.robot.services.wheel_odometry_service.WheelOdometryService.seed">seed() (feathersdk.robot.services.wheel_odometry_service.WheelOdometryService method)</a>
 </li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManager.send_teensy_message">send_teensy_message() (feathersdk.robot.comms.comms_manager.CommsManager method)</a>
@@ -1945,6 +2060,12 @@
 </li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.set_atexit_handler">set_atexit_handler (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
 </li>
+        <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.set_control_mode">set_control_mode() (feathersdk.robot.actuator_systems.arms_system.ArmsSystem method)</a>
+
+        <ul>
+          <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_control_mode">(feathersdk.robot.actuator_systems.arms_system.Robstride7MArm method)</a>
+</li>
+        </ul></li>
         <li><a href="api/feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.ActuatorConfig.set_endpoint">set_endpoint() (feathersdk.robot.actuators.actuator.ActuatorConfig method)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.admin.html#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.set_id">set_id() (feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl method)</a>
@@ -1956,6 +2077,8 @@
         <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor.set_operation_mode">set_operation_mode() (feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotor method)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.realhand.realhand.html#feathersdk.robot.actuators.realhand.realhand.RealHand.set_position">set_position() (feathersdk.robot.actuators.realhand.realhand.RealHand method)</a>
+</li>
+        <li><a href="api/feathersdk.cli.html#feathersdk.cli.set_print_enabled">set_print_enabled() (in module feathersdk.cli)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor.set_run_mode">set_run_mode() (feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor method)</a>
 </li>
@@ -2005,6 +2128,8 @@
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.navigation_system.html#feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem.set_velocity">set_velocity() (feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem method)</a>
 </li>
+        <li><a href="api/feathersdk.cli.setup_ethernet.html#feathersdk.cli.setup_ethernet.setup_ethernet">setup_ethernet() (in module feathersdk.cli.setup_ethernet)</a>
+</li>
         <li><a href="api/feathersdk.robot.actuators.actuator.html#feathersdk.robot.actuators.actuator.ActuatorConfig.shares_endpoint_with">shares_endpoint_with (feathersdk.robot.actuators.actuator.ActuatorConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_pitch_motor">shoulder_pitch_motor (feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig attribute)</a>
@@ -2014,6 +2139,8 @@
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.shoulder_yaw_motor">shoulder_yaw_motor (feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig.side">side (feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig attribute)</a>
+</li>
+        <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.skip_find_actuators">skip_find_actuators (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobotConfig.skip_initialization">skip_initialization (feathersdk.robot.robot.FeatherRobotConfig attribute)</a>
 </li>
@@ -2069,6 +2196,8 @@
           <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotorConfig.target_velocity">(feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotorConfig attribute)</a>
 </li>
         </ul></li>
+        <li><a href="api/feathersdk.robot.actuator_systems.arms_system.html#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Targets">Targets (feathersdk.robot.actuator_systems.arms_system.ArmsControlMode attribute)</a>
+</li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManagerConfig.teensy_board_clock_sync_hz">teensy_board_clock_sync_hz (feathersdk.robot.comms.comms_manager.CommsManagerConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManagerConfig.teensy_candump_update_frequency">teensy_candump_update_frequency (feathersdk.robot.comms.comms_manager.CommsManagerConfig attribute)</a>
@@ -2099,6 +2228,12 @@
 </li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManagerConfig.teensy_port">teensy_port (feathersdk.robot.comms.comms_manager.CommsManagerConfig attribute)</a>
 </li>
+        <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotorConfig.teensy_telemetry_max_size">teensy_telemetry_max_size (feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotorConfig attribute)</a>
+
+        <ul>
+          <li><a href="api/feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig.teensy_telemetry_max_size">(feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotorConfig attribute)</a>
+</li>
+        </ul></li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.CommsManagerConfig.teensy_telemetry_update_frequency">teensy_telemetry_update_frequency (feathersdk.robot.comms.comms_manager.CommsManagerConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.comms.comms_manager.html#feathersdk.robot.comms.comms_manager.TeensyError">TeensyError</a>
@@ -2115,10 +2250,10 @@
 </li>
         <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.telemetry_max_file_size">telemetry_max_file_size (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
 </li>
-        <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.telemetry_max_total_size">telemetry_max_total_size (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.telemetry_max_total_size">telemetry_max_total_size (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
+</li>
         <li><a href="api/feathersdk.robot.services.data_monitor_service.html#feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig.telemetry_op_freq">telemetry_op_freq (feathersdk.robot.services.data_monitor_service.DataMonitorServiceConfig attribute)</a>
 </li>
         <li><a href="api/feathersdk.robot.actuators.ezmotion.ezmotion.html#feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotorConfig.telemetry_size">telemetry_size (feathersdk.robot.actuators.ezmotion.ezmotion.EZMotionMotorConfig attribute)</a>

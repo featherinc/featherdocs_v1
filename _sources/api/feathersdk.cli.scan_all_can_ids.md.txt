@@ -1,0 +1,6 @@
+# feathersdk.cli.scan_all_can_ids Module
+
+```{eval-rst}
+.. automodule:: feathersdk.cli.scan_all_can_ids
+   :show-inheritance:
+```

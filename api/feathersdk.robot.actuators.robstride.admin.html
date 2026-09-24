@@ -199,6 +199,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../log_parsing.html">Log parsing</a></li>
@@ -209,6 +210,9 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="feathersdk.cli.html">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -359,19 +363,12 @@ firmware version.</p></li>
 <li><p><strong>progressbar</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, show a progress bar for the flash operation. Requires tqdm library to be installed.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the firmware was flashed successfully, False if the firmware was already at the correct version
+and thus flashing was skipped.</p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.read_firmware_version">
-<span class="sig-name descname"><span class="pre">read_firmware_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.read_firmware_version" title="Link to this definition">¶</a></dt>
-<dd><p>Read the current firmware version of the motor.</p>
-<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -439,7 +436,6 @@ firmware version.</p></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl"><code class="docutils literal notranslate"><span class="pre">RobstrideAdminControl</span></code></a><ul>
 <li><a class="reference internal" href="#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.set_id"><code class="docutils literal notranslate"><span class="pre">RobstrideAdminControl.set_id()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.flash_firmware"><code class="docutils literal notranslate"><span class="pre">RobstrideAdminControl.flash_firmware()</span></code></a></li>
-<li><a class="reference internal" href="#feathersdk.robot.actuators.robstride.admin.RobstrideAdminControl.read_firmware_version"><code class="docutils literal notranslate"><span class="pre">RobstrideAdminControl.read_firmware_version()</span></code></a></li>
 </ul>
 </li>
 </ul>

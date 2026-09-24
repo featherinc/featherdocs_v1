@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="FeatherCLI" href="feathercli.html"><link rel="prev" title="Feather SDK Documentation" href="index.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Actuator Systems" href="actuator_systems.html"><link rel="prev" title="Feather SDK Documentation" href="index.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
         <title>Overview - Feather SDK 0.2.0</title>
@@ -199,6 +199,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>
@@ -209,6 +210,9 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="api/feathersdk.cli.html">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="api/feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -379,6 +383,7 @@ actuators and the control logic for one task.</p>
 <p>You command the <em>capability</em> through the system API (for example setting base velocity or moving the torso to a height)
 instead of driving every motor yourself. The system decides how to turn that request into actuator commands.</p>
 <p>Systems will also expose individual actuators if you wish to implement control yourself.</p>
+<p>How to command the neck, torso, base, and arms is in <a class="reference internal" href="actuator_systems.html"><span class="std std-doc">Actuator systems</span></a>.</p>
 </section>
 <section id="services">
 <h2>Services<a class="headerlink" href="#services" title="Link to this heading">¶</a></h2>
@@ -577,12 +582,12 @@ joint on <code class="docutils literal notranslate"><span class="pre">/feather/j
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="feathercli.html">
+          <a class="next-page" href="actuator_systems.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">FeatherCLI</div>
+                <div class="title">Actuator Systems</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

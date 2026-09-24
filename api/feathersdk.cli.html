@@ -199,6 +199,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../log_parsing.html">Log parsing</a></li>
@@ -209,6 +210,9 @@
 <li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -322,6 +326,37 @@
           <section id="module-feathersdk.cli">
 <span id="feathersdk-cli-package"></span><h1>feathersdk.cli Package<a class="headerlink" href="#module-feathersdk.cli" title="Link to this heading">¶</a></h1>
 <p>Feather SDK command-line interface (<code class="docutils literal notranslate"><span class="pre">feathercli</span></code>).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="feathersdk.cli.set_print_enabled">
+<span class="sig-prename descclassname"><span class="pre">feathersdk.cli.</span></span><span class="sig-name descname"><span class="pre">set_print_enabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enabled</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.cli.set_print_enabled" title="Link to this definition">¶</a></dt>
+<dd><p>Set whether printing to the console is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="feathersdk.cli.print_cli">
+<span class="sig-prename descclassname"><span class="pre">feathersdk.cli.</span></span><span class="sig-name descname"><span class="pre">print_cli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.cli.print_cli" title="Link to this definition">¶</a></dt>
+<dd><p>Print a message to the console if printing is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -333,8 +368,32 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="feathersdk.cli.install.html">feathersdk.cli.install Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.install.html#feathersdk.cli.install.AVAILABLE_VERSIONS"><code class="docutils literal notranslate"><span class="pre">AVAILABLE_VERSIONS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.install.html#feathersdk.cli.install.chmod_tree"><code class="docutils literal notranslate"><span class="pre">chmod_tree()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.install.html#feathersdk.cli.install.install"><code class="docutils literal notranslate"><span class="pre">install()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.setup_ethernet.html#feathersdk.cli.setup_ethernet.setup_ethernet"><code class="docutils literal notranslate"><span class="pre">setup_ethernet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig"><code class="docutils literal notranslate"><span class="pre">CustomRobstrideActuatorSystemConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystem"><code class="docutils literal notranslate"><span class="pre">CustomRobstrideActuatorSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystemConfig"><code class="docutils literal notranslate"><span class="pre">CustomEZMotionActuatorSystemConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.CustomEZMotionActuatorSystem"><code class="docutils literal notranslate"><span class="pre">CustomEZMotionActuatorSystem</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.create_custom_robot"><code class="docutils literal notranslate"><span class="pre">create_custom_robot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.scan_the_can"><code class="docutils literal notranslate"><span class="pre">scan_the_can()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.run_scancan"><code class="docutils literal notranslate"><span class="pre">run_scancan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.add_arguments"><code class="docutils literal notranslate"><span class="pre">add_arguments()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html#feathersdk.cli.scan_all_can_ids.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.download_rob_bins"><code class="docutils literal notranslate"><span class="pre">download_rob_bins()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.run_flash_motor"><code class="docutils literal notranslate"><span class="pre">run_flash_motor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.add_arguments"><code class="docutils literal notranslate"><span class="pre">add_arguments()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="feathersdk.cli.flash_motor.html#feathersdk.cli.flash_motor.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -413,6 +472,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">feathersdk.cli Package</a><ul>
+<li><a class="reference internal" href="#feathersdk.cli.set_print_enabled"><code class="docutils literal notranslate"><span class="pre">set_print_enabled()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.cli.print_cli"><code class="docutils literal notranslate"><span class="pre">print_cli()</span></code></a></li>
 <li><a class="reference internal" href="#modules">Modules</a></li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 </ul>

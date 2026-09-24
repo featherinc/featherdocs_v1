@@ -199,6 +199,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../log_parsing.html">Log parsing</a></li>
@@ -209,6 +210,9 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="feathersdk.cli.html">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -570,6 +574,25 @@ torque.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsControlMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">ArmsControlMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UniqueEnum</span></code></p>
+<p>The control mode for the arm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Targets">
+<span class="sig-name descname"><span class="pre">Targets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'targets'</span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Targets" title="Link to this definition">¶</a></dt>
+<dd><p>Arms will move to specified target positions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Impedance">
+<span class="sig-name descname"><span class="pre">Impedance</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'impedance'</span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Impedance" title="Link to this definition">¶</a></dt>
+<dd><p>Arms will attempt to hold their current position unless moved around by external (non-gravity) forces.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.robot.actuator_systems.arms_system.</span></span><span class="sig-name descname"><span class="pre">Robstride7MArm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="feathersdk.robot.actuator_systems.actuator_system.html#feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem" title="feathersdk.robot.actuator_systems.actuator_system.ActuatorSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActuatorSystem</span></code></a>[<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig" title="feathersdk.robot.actuator_systems.arms_system.Robstride7MArmConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">Robstride7MArmConfig</span></code></a>, <a class="reference internal" href="feathersdk.robot.actuators.robstride.robstride_motor.html#feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor" title="feathersdk.robot.actuators.robstride.robstride_motor.RobstrideMotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">RobstrideMotor</span></code></a>]</p>
@@ -610,6 +633,8 @@ the following formula:</p>
 Otherwise it should be a dictionary with keys being either 1) the string name of the motor or 2) the
 RobstrideMotor object itself. Values are the new target values for that parameter. Any missing motor keys will
 not have their parameters changed. Any parameter values that are <cite>None</cite> will not be changed.</p>
+<p>NOTE: If the arm is not in target control mode, then there may be restrictions on which parameters can be set.
+If in Impedance control mode, then only <cite>kps</cite>, <cite>kds</cite>, and <cite>additional_torques</cite> can be set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -675,6 +700,7 @@ the motor to respond with current telemetry.</p>
 <dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.home">
 <span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clean_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.home" title="Link to this definition">¶</a></dt>
 <dd><p>Home the arm.</p>
+<p>Will switch to target control mode before homing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -711,6 +737,24 @@ then this may not freeze well!</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>clean_parameters</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, will overwrite all movement parameters with defaults. This way, we will still
 freeze nicely even if bad parameters are set.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_control_mode">
+<span class="sig-name descname"><span class="pre">set_control_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_control_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the control mode for the arm.</p>
+<p>If switching to target control mode from a different control mode, will freeze the arms in place. Does nothing
+if <cite>control_mode</cite> is already the current control mode.</p>
+<p>If switching to impedance control mode, the arms will decelerate to a stop and attempt to hold their position.
+However, if external (non-gravity) forces are applied, the arms will move around.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>control_mode</strong> (<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode" title="feathersdk.robot.actuator_systems.arms_system.ArmsControlMode"><em>ArmsControlMode</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'targets'</em><em>, </em><em>'impedance'</em><em>]</em>) – The new control mode to set. Can be a string or an <cite>ArmsControlMode</cite> enum.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -940,6 +984,24 @@ See Note above for format details.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.arms_system.ArmsSystem.set_control_mode">
+<span class="sig-name descname"><span class="pre">set_control_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.set_control_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the control mode for the arms system.</p>
+<p>If switching to target control mode from a different control mode, will freeze the arms in place. Does nothing
+if <cite>control_mode</cite> is already the current control mode.</p>
+<p>If switching to impedance control mode, the arms will decelerate to a stop and attempt to hold their position.
+However, if external (non-gravity) forces are applied, the arms will move around.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>control_mode</strong> (<a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode" title="feathersdk.robot.actuator_systems.arms_system.ArmsControlMode"><em>ArmsControlMode</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><em>Literal</em></a><em>[</em><em>'targets'</em><em>, </em><em>'impedance'</em><em>]</em>) – The new control mode to set. Can be a string or an <cite>ArmsControlMode</cite> enum.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -1036,6 +1098,11 @@ See Note above for format details.</p></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.RobstrideArmMotorTargets.curr_acceleration"><code class="docutils literal notranslate"><span class="pre">RobstrideArmMotorTargets.curr_acceleration</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode"><code class="docutils literal notranslate"><span class="pre">ArmsControlMode</span></code></a><ul>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Targets"><code class="docutils literal notranslate"><span class="pre">ArmsControlMode.Targets</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsControlMode.Impedance"><code class="docutils literal notranslate"><span class="pre">ArmsControlMode.Impedance</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm</span></code></a><ul>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_targets"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.set_targets()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.capture_position"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.capture_position()</span></code></a></li>
@@ -1044,6 +1111,7 @@ See Note above for format details.</p></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.home"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.home()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.clean_parameters"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.clean_parameters()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.freeze"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.freeze()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.set_control_mode"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.set_control_mode()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.Robstride7MArm.recalibrate"><code class="docutils literal notranslate"><span class="pre">Robstride7MArm.recalibrate()</span></code></a></li>
 </ul>
 </li>
@@ -1065,6 +1133,7 @@ See Note above for format details.</p></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.disable"><code class="docutils literal notranslate"><span class="pre">ArmsSystem.disable()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.home"><code class="docutils literal notranslate"><span class="pre">ArmsSystem.home()</span></code></a></li>
 <li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.freeze"><code class="docutils literal notranslate"><span class="pre">ArmsSystem.freeze()</span></code></a></li>
+<li><a class="reference internal" href="#feathersdk.robot.actuator_systems.arms_system.ArmsSystem.set_control_mode"><code class="docutils literal notranslate"><span class="pre">ArmsSystem.set_control_mode()</span></code></a></li>
 </ul>
 </li>
 </ul>

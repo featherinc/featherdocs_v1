@@ -1,0 +1,173 @@
+# Actuator Systems
+
+This page describes how to command the neck, torso, holonomic base, and arms.
+
+```python
+from feathersdk.robot.robot import initialize_feather_system, FeatherRobot
+
+robot: FeatherRobot = initialize_feather_system()
+
+neck = robot.neck_system
+torso = robot.torso_system
+nav = robot.navigation_system
+arms = robot.arms_system
+```
+
+If a system is omitted in the robot config, the matching attribute is `None`.
+
+## Neck system
+
+`robot.neck_system` is a 2-DOF head: pitch (look up/down) and yaw (look left/right). Angles are in **radians**.
+
+**Home / Zero position:** After init the neck is at `(pitch=0, yaw=0)`: the head will be looking straight down, parallel
+to the ground. Positive pitch looks down; negative pitch looks up. Positive yaw turns right; negative yaw turns left.
+
+**`go_to(pitch, yaw)`** points the neck at that pitch and yaw. Omit an argument (or pass `None`) to leave that axis
+unchanged.
+
+```python
+neck.go_to(pitch=-0.3, yaw=-0.4)  # look up and to the left
+neck.go_to(pitch=0.0, yaw=0.0)    # return to home
+neck.go_to(yaw=0.2)               # change yaw only
+```
+
+**`set_speed(pitch_speed, yaw_speed)`** sets how fast the neck motors move toward the `go_to` target, in rad/s. It does
+not start motion by itself — it is the speed used by the next (and current) `go_to`.
+
+```python
+neck.set_speed(pitch_speed=1.0, yaw_speed=1.0)
+neck.go_to(pitch=-0.5, yaw=0.0)
+```
+
+## Torso system
+
+`robot.torso_system` is the vertical lift. Heights are in **millimeters**.
+
+**Home / 600mm:** Calibration zeros the lift at the **top** of travel. That top position is height `600`. Other values
+are millimeters below that home: `500` is 100 mm below the top, `400` is 200 mm below, and so on.
+
+```python
+torso.go_to(600)           # top / calibrated home
+torso.go_to(500)           # 100 mm below home
+torso.go_to(500, velocity=20.0)  # same target, 20 mm/s
+```
+
+`go_to(height, velocity=None)` moves to that height. `velocity` is a positive speed in mm/s; if omitted, the motor's
+configured default is used.
+
+```python
+print(torso.get_height())  # current height in mm (600 at the top)
+```
+
+## Navigation system
+
+`robot.navigation_system` is a **holonomic** three-wheel swerve. The robot can translate in any planar direction and
+rotate at the same time — it does not have to turn to face a heading before driving that way.
+
+Control it with `set_velocity(vx, vy, omega, orient_only=False)`. The command is a body-frame twist:
+
+| Argument | Unit | Meaning |
+| --- | --- | --- |
+| `vx` | m/s | +X forward, −X backward |
+| `vy` | m/s | +Y left, −Y right |
+| `omega` | rad/s | yaw rate, positive counter-clockwise |
+
+The last command keeps running until you send a new one. Stop with zeros:
+
+```python
+nav.set_velocity(0.25, 0.0, 0.0)    # forward
+nav.set_velocity(0.0, 0.25, 0.0)    # left
+nav.set_velocity(0.0, 0.0, 0.4)     # rotate in place, CCW
+nav.set_velocity(0.2, 0.1, -0.2)    # translate and yaw together
+nav.set_velocity(0.0, 0.0, 0.0)     # stop
+```
+
+**`orient_only=True`** steers the wheels as if they were going to execute that velocity, but does **not** spin the
+drive motors. Use it to point the wheels in the desired direction without moving the robot:
+
+```python
+nav.set_velocity(0.0, 1.0, 0.0, orient_only=True)  # point wheels left, stay still
+```
+
+The direction of `(vx, vy, omega)` is what matters; drive speed is forced to 0. A zero twist (`0, 0, 0`) is still just
+a stop and does not change steering.
+
+## Arms system
+
+:::{warning}
+Always stay outside of arms reach of the robot when the arms are enabled. At unrestricted speeds, they can move very 
+fast. Getting hit with a large hunk of metal at those speeds could cause serious damage.
+:::
+
+`robot.arms_system` owns the left and right 7-DOF arms. You can command **both** through the parent, or **one arm**
+through `left_arm` / `right_arm`:
+
+```python
+robot.arms_system.enable()
+robot.arms_system.left_arm.enable()
+robot.arms_system.right_arm.home()
+```
+
+The same methods exist on both levels: `enable`, `disable`, `home`, `freeze`, `set_targets`, `set_control_mode`,
+`capture_position`.
+
+**Arms start disabled.** Initialization calibrates them and starts the control thread, but they will not take motion
+commands until you `enable()`.
+
+```python
+arms.enable()     # required before any motion
+arms.disable()    # home, then power the motors down
+```
+
+### Control modes
+
+Set the mode with `set_control_mode(...)`, using `"targets"` / `"impedance"` or `ArmsControlMode`.
+
+**Targets** (default). Joints move to commanded positions under velocity / acceleration / jerk limits, planned by
+[Ruckig](https://ruckig.com/). Give those constraints with `set_targets(...)` — a dict of motor name → value for
+whichever fields you want to change (`positions`, `max_velocities`, `max_accelerations`, `max_jerks`, `kps`, `kds`,
+and so on). Omitted keys are left as they are.
+
+```python
+from feathersdk.robot.actuator_systems.arms_system import ArmsControlMode
+
+arms.set_control_mode(ArmsControlMode.Targets)  # or "targets"
+arms.left_arm.set_targets(
+    positions={"elbow_left": 0.5},
+    max_velocities={"elbow_left": 0.8},
+)
+```
+
+**Impedance.** The arm holds its current pose (gravity is compensated) but yields if you push on it. External
+non-gravity forces move the arm; when you let go, it holds the new pose. Switching to impedance captures the current
+joints as the hold position. In this mode `set_targets` can only change `kps`, `kds`, and `additional_torques`.
+
+```python
+arms.set_control_mode("impedance")
+# move the arm by hand...
+arms.set_control_mode("targets")  # freezes at the current pose
+```
+
+### `home`, `freeze`, `disable`, `capture_position`
+
+**`home()`** switches to Targets mode and moves every joint to `0` (the calibrated home pose, arms down along the
+body). By default it blocks until the joints are close to home.
+
+**`freeze()`** holds the pose at the moment of the call (Targets mode, current positions as the target). Use this to
+stop in place without homing.
+
+**`disable()`** homes first, then powers the motors down. It is not an in-place stop — use `freeze()` if you want to
+hold the current pose.
+
+**`capture_position()`** returns `{motor_name: angle_rad}` for that arm, or both arms if called on `arms_system`.
+Pass `trigger_feedback=True` if the arm is currently disabled and you need a fresh sample.
+
+```python
+arms.enable()
+q = arms.capture_position()          # both arms
+q_left = arms.left_arm.capture_position()
+
+arms.freeze()                        # hold here
+arms.home()                          # go to joint zeros
+arms.disable()                       # home, then disable
+```

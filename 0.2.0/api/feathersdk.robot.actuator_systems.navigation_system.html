@@ -199,6 +199,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../log_parsing.html">Log parsing</a></li>
@@ -209,6 +210,9 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="feathersdk.cli.html">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -549,7 +553,7 @@ If None, use the per-actuator config’s <cite>allow_load_calibration</cite> val
 
 <dl class="py method">
 <dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem.set_velocity">
-<span class="sig-name descname"><span class="pre">set_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem.set_velocity" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orient_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.robot.actuator_systems.navigation_system.ThreeWheelHolonomicRobstrideNavigationSystem.set_velocity" title="Link to this definition">¶</a></dt>
 <dd><p>Command a holonomic body-frame velocity on the three-wheel swerve.</p>
 <p>Robot / IMU frame: +X forward, +Y left, yaw positive counter-clockwise.
 Translation is in m/s; <code class="docutils literal notranslate"><span class="pre">omega</span></code> is in rad/s. Drive motors are commanded in rad/s via
@@ -577,6 +581,8 @@ are scaled by the same factor so the commanded body-velocity direction is preser
 <li><p><strong>vx</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Robot-frame X velocity in m/s. +X is forward.</p></li>
 <li><p><strong>vy</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Robot-frame Y velocity in m/s. +Y is left.</p></li>
 <li><p><strong>omega</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Yaw rate in rad/s. Positive is counter-clockwise.</p></li>
+<li><p><strong>orient_only</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, only orient the robot as if it would perform the velocity commands, but set the
+actual drive velocities to 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>

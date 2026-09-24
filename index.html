@@ -199,6 +199,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>
@@ -209,6 +210,9 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="api/feathersdk.cli.html">feathersdk.cli Package</a><input aria-label="Toggle navigation of feathersdk.cli Package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.cli.html">feathersdk.cli.cli Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.install.html">feathersdk.cli.install Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.setup_ethernet.html">feathersdk.cli.setup_ethernet Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.scan_all_can_ids.html">feathersdk.cli.scan_all_can_ids Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.flash_motor.html">feathersdk.cli.flash_motor Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/feathersdk.cli.example.html">feathersdk.cli.example Package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="api/feathersdk.cli.control.html">feathersdk.cli.control Package</a><input aria-label="Toggle navigation of feathersdk.cli.control Package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/feathersdk.cli.control.keyboard.html">feathersdk.cli.control.keyboard Module</a></li>
@@ -332,7 +336,8 @@
 <section id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">feathercli</span></code> is the SDK command-line tool. See <a class="reference internal" href="feathercli.html"><span class="std std-doc">FeatherCLI</span></a> for how it works and the full command reference.
-For how the robot object and its modules fit together, see <a class="reference internal" href="overview.html"><span class="std std-doc">Overview</span></a>.</p>
+For how the robot object and its modules fit together, see <a class="reference internal" href="overview.html"><span class="std std-doc">Overview</span></a>.
+For commanding the neck, torso, base, and arms, see <a class="reference internal" href="actuator_systems.html"><span class="std std-doc">Actuator systems</span></a>.</p>
 <section id="system-installation">
 <h3>1. System Installation<a class="headerlink" href="#system-installation" title="Link to this heading">¶</a></h3>
 <p>On a fresh device, we must do a one-time feathersdk system install. You can check if everything is installed using:</p>
@@ -357,7 +362,7 @@ For how the robot object and its modules fit together, see <a class="reference i
 <p>We only support Python 3.9+ for full <code class="docutils literal notranslate"><span class="pre">feathersdk</span></code> usage, however you should be able to pip-install and use
 <code class="docutils literal notranslate"><span class="pre">feathercli</span> <span class="pre">install</span></code> on 3.7+ just for installation. This way, you can use the default shipped python on a fresh
 jetson install by just running:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>feathersdk<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>feathercli<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>YOUR_VERSION
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>feathersdk<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>feathercli<span class="w"> </span>install<span class="w"> </span>--all<span class="w"> </span>-v<span class="w"> </span>YOUR_VERSION
 </pre></div>
 </div>
 </div>
@@ -407,6 +412,7 @@ a system in <code class="docutils literal notranslate"><span class="pre">Feather
 <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator_systems.html">Actuator Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="feathercli.html">FeatherCLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Data Monitoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_parsing.html">Log parsing</a></li>

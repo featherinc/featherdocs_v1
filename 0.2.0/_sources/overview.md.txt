@@ -69,6 +69,8 @@ instead of driving every motor yourself. The system decides how to turn that req
 
 Systems will also expose individual actuators if you wish to implement control yourself.
 
+How to command the neck, torso, base, and arms is in [Actuator systems](actuator_systems.md).
+
 ## Services
 
 A **service** is a robot module that is not primarily an actuator group. Services provide sensing, estimation, logging,
