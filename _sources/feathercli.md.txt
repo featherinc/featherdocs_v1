@@ -1,7 +1,7 @@
 # FeatherCLI
 
 `feathercli` is the command-line tool installed with the Feather SDK. Use it to install the robot onto the machine,
-configure the Teensy ethernet link, scan and flash motors, teleoperate, and copy the example notebook.
+configure the Teensy ethernet link, scan and flash motors, change a Robstride motor's id, teleoperate, and copy the example notebook.
 
 Run `feathercli --help` (or `feathercli <command> --help`) for the live flag list.
 
@@ -177,8 +177,8 @@ update the jetson ethernet interface appropriately.
 
 ### --> `feathercli scancan`
 
-Scan the Teensy CAN buses for motors. Each id in `[1, MAX_NUM_ACTUATORS)` is initialized, then probed. A motor counts 
-as present when its reply moves that parameter's telemetry timestamp.
+Scan the Teensy CAN buses for motors. Each id in `[0, MAX_NUM_ACTUATORS)` is initialized, then probed, unless `--ids` 
+lists a subset. A motor counts as present when its reply moves that parameter's telemetry timestamp.
 
 By default this scans Robstride motors (`LIMIT_TORQUE`) and EZMotion motors (`POSITION`). The two motor types are 
 scanned in separate processes.
@@ -187,6 +187,7 @@ scanned in separate processes.
 feathercli scancan
 feathercli scancan can0 can2
 feathercli scancan --only-robstride --attempts 3
+feathercli scancan --ids=1,4,0x43
 ```
 
 Bus names are Teensy bus indexes (`can0`, `can1`, `vcan0`), not host SocketCAN device names.
@@ -194,12 +195,13 @@ Bus names are Teensy bus indexes (`can0`, `can1`, `vcan0`), not host SocketCAN d
 | Flag | Description |
 | --- | --- |
 | `IFACE` | Optional bus names. Default: every bus the Teensy reports. |
-| `-c`, `--configs` | Robot config path. Defaults to the system robot config. |
+| `-c`, `--configs` | Robot config path. Defaults to the system robot config. Only needed to know if we are using real/emulated teensy. |
 | `--only-robstride` | Scan Robstride motors only. |
 | `--only-ezmotion` | Scan EZMotion motors only. Mutually exclusive with `--only-robstride`. |
 | `--delay` | Seconds between transmit frames. Default: `0.002`. |
 | `--wait` | Seconds to wait for replies after a probe burst. Default: `0.05`. |
 | `--attempts` | Probe attempts per bus. Default: `1`. |
+| `--ids` | Comma-separated ids to probe instead of every id in `[0, MAX_NUM_ACTUATORS)`, decimal or hex (for example `1,4,0x43`). |
 
 ---
 
@@ -220,7 +222,30 @@ feathercli flash-motor -c /path/to/robot_config.py
 
 | Flag | Description |
 | --- | --- |
-| `ID` | Optional motor ids, decimal or hex. Default: every Robstride motor that answers. Ids must be in `[1, MAX_NUM_ACTUATORS)`. |
+| `ID` | Optional motor ids, decimal or hex. Default: every Robstride motor that answers. Ids must be in `[0, MAX_NUM_ACTUATORS)`. |
 | `--force` | Flash even when the motor already has this firmware version. |
 | `--progress` | `True` or `False`. Show a progress bar while sending firmware packets. Default: `True`. |
-| `-c`, `--configs` | Robot config path. Defaults to the system robot config. |
+| `-c`, `--configs` | Robot config path. Defaults to the system robot config. Only needed to know if we are using real/emulated teensy. |
+
+---
+
+### --> `feathercli set-motor-id`
+
+Change one Robstride motor's CAN id. EZMotion motors are not supported.
+
+The command scans for `old_id` and `new_id` as Robstride motors. `old_id` must answer on exactly one bus; if it answers on more than one, pass `--iface`. The change is refused when `new_id` already answers on that same bus. After the id is written, the command reads `LIMIT_TORQUE` from `new_id` and fails if that motor does not reply.
+
+Ids are decimal or hex and must be in `[0, MAX_NUM_ACTUATORS)`. `old_id` and `new_id` must differ.
+
+```bash
+feathercli set-motor-id 1 0x43
+feathercli set-motor-id 3 0x15 --iface can0
+feathercli set-motor-id 4 5 -c /path/to/robot_config.py
+```
+
+| Flag | Description |
+| --- | --- |
+| `old_id` | Current Robstride motor id. |
+| `new_id` | Id to assign. Must not already answer on the same bus as `old_id`. |
+| `--iface` | Teensy bus to scan, for example `can0`. Default: every bus the Teensy reports. |
+| `-c`, `--configs` | Robot config path. Defaults to the system robot config. Only needed to know if we are using real/emulated teensy. |

@@ -381,13 +381,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> (<em>TConfig</em>)</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><em>Any</em></a>)</p></li>
+<li><p><strong>config</strong> (<em>TActuatorSystemConfig</em>)</p></li>
+<li><p><strong>robot</strong> (<a class="reference internal" href="feathersdk.robot.robot.html#feathersdk.robot.robot.FeatherRobot" title="feathersdk.robot.robot.FeatherRobot"><em>FeatherRobot</em></a>)</p></li>
 </ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Self" title="(in Python v3.14)"><em>Self</em></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,7 +419,7 @@
 <dt class="sig sig-object py" id="feathersdk.robot.actuator_systems.torso_system.LinearEZMotionTorsoSystemConfig.direction">
 <span class="sig-name descname"><span class="pre">direction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">-</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#feathersdk.robot.actuator_systems.torso_system.LinearEZMotionTorsoSystemConfig.direction" title="Link to this definition">¶</a></dt>
 <dd><p>The direction of the torso lift motor. 1 means encoder counts increase as the height increases, -1 means encoder
-counts increase as the height decreases.</p>
+counts increase as the height decreases. Also selects the homing method so the motor always homes to the top.</p>
 </dd></dl>
 
 <dl class="py attribute">

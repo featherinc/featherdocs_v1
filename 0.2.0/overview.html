@@ -478,8 +478,8 @@ otherwise a copy).</p>
 </pre></div>
 </div>
 <p>You can also index the global store directly with the full channel name:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span><span class="o">.</span><span class="n">global_telemetry</span><span class="p">[</span><span class="s2">&quot;shoulder_pitch.FB_TORQUE&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">robot</span><span class="o">.</span><span class="n">global_telemetry</span><span class="p">[</span><span class="s2">&quot;shoulder_pitch.FB_TORQUE&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">:]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span><span class="o">.</span><span class="n">global_telemetry</span><span class="p">[</span><span class="s2">"shoulder_pitch.FB_TORQUE"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">robot</span><span class="o">.</span><span class="n">global_telemetry</span><span class="p">[</span><span class="s2">"shoulder_pitch.FB_TORQUE"</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">:]</span>
 </pre></div>
 </div>
 <p>Prefer <code class="docutils literal notranslate"><span class="pre">actuator.telemetry[...]</span></code> in application code — it keeps parameter enums and naming consistent per actuator

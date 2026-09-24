@@ -448,19 +448,19 @@ whichever fields you want to change (<code class="docutils literal notranslate">
 and so on). Omitted keys are left as they are.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">feathersdk.robot.actuator_systems.arms_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArmsControlMode</span>
 
-<span class="n">arms</span><span class="o">.</span><span class="n">set_control_mode</span><span class="p">(</span><span class="n">ArmsControlMode</span><span class="o">.</span><span class="n">Targets</span><span class="p">)</span>  <span class="c1"># or &quot;targets&quot;</span>
+<span class="n">arms</span><span class="o">.</span><span class="n">set_control_mode</span><span class="p">(</span><span class="n">ArmsControlMode</span><span class="o">.</span><span class="n">Targets</span><span class="p">)</span>  <span class="c1"># or "targets"</span>
 <span class="n">arms</span><span class="o">.</span><span class="n">left_arm</span><span class="o">.</span><span class="n">set_targets</span><span class="p">(</span>
-    <span class="n">positions</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;elbow_left&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>
-    <span class="n">max_velocities</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;elbow_left&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span>
+    <span class="n">positions</span><span class="o">=</span><span class="p">{</span><span class="s2">"elbow_left"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>
+    <span class="n">max_velocities</span><span class="o">=</span><span class="p">{</span><span class="s2">"elbow_left"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Impedance.</strong> The arm holds its current pose (gravity is compensated) but yields if you push on it. External
 non-gravity forces move the arm; when you let go, it holds the new pose. Switching to impedance captures the current
 joints as the hold position. In this mode <code class="docutils literal notranslate"><span class="pre">set_targets</span></code> can only change <code class="docutils literal notranslate"><span class="pre">kps</span></code>, <code class="docutils literal notranslate"><span class="pre">kds</span></code>, and <code class="docutils literal notranslate"><span class="pre">additional_torques</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arms</span><span class="o">.</span><span class="n">set_control_mode</span><span class="p">(</span><span class="s2">&quot;impedance&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arms</span><span class="o">.</span><span class="n">set_control_mode</span><span class="p">(</span><span class="s2">"impedance"</span><span class="p">)</span>
 <span class="c1"># move the arm by hand...</span>
-<span class="n">arms</span><span class="o">.</span><span class="n">set_control_mode</span><span class="p">(</span><span class="s2">&quot;targets&quot;</span><span class="p">)</span>  <span class="c1"># freezes at the current pose</span>
+<span class="n">arms</span><span class="o">.</span><span class="n">set_control_mode</span><span class="p">(</span><span class="s2">"targets"</span><span class="p">)</span>  <span class="c1"># freezes at the current pose</span>
 </pre></div>
 </div>
 </section>

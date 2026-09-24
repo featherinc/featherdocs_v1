@@ -326,8 +326,9 @@
           <section id="module-feathersdk.cli.scan_all_can_ids">
 <span id="feathersdk-cli-scan-all-can-ids-module"></span><h1>feathersdk.cli.scan_all_can_ids Module<a class="headerlink" href="#module-feathersdk.cli.scan_all_can_ids" title="Link to this heading">¶</a></h1>
 <p>Scan Teensy CAN buses for Robstride motors.</p>
-<p>Every id in <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">MAX_NUM_ACTUATORS)</span></code> is initialized on the Teensy, then each bus is probed with a
-non-blocking <code class="docutils literal notranslate"><span class="pre">LIMIT_TORQUE</span></code> read. A motor is present when that parameter’s telemetry timestamp moves.</p>
+<p>Every id in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">MAX_NUM_ACTUATORS)</span></code> is initialized on the Teensy, then each bus is probed with a
+non-blocking <code class="docutils literal notranslate"><span class="pre">LIMIT_TORQUE</span></code> read. A motor is present when that parameter’s telemetry timestamp moves.
+Pass <code class="docutils literal notranslate"><span class="pre">--ids</span></code> to scan only those ids instead of the full range.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">feathersdk.cli.scan_all_can_ids.</span></span><span class="sig-name descname"><span class="pre">CustomRobstrideActuatorSystemConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name='custom_robstride_actuator_system'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires_urdf=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe_stop_policy=SafeStopPolicy.CANNOT_ENTER_SAFE_STOP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operating_frequency=30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actuators_share_same_endpoint=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actuators=&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.cli.scan_all_can_ids.CustomRobstrideActuatorSystemConfig" title="Link to this definition">¶</a></dt>
@@ -476,25 +477,27 @@ If None, use the per-actuator config’s <cite>allow_load_calibration</cite> val
 
 <dl class="py function">
 <dt class="sig sig-object py" id="feathersdk.cli.scan_all_can_ids.scan_the_can">
-<span class="sig-prename descclassname"><span class="pre">feathersdk.cli.scan_all_can_ids.</span></span><span class="sig-name descname"><span class="pre">scan_the_can</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ifaces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.cli.scan_all_can_ids.scan_the_can" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">feathersdk.cli.scan_all_can_ids.</span></span><span class="sig-name descname"><span class="pre">scan_the_can</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ifaces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#feathersdk.cli.scan_all_can_ids.scan_the_can" title="Link to this definition">¶</a></dt>
 <dd><p>Scan the CAN buses for the given motor types.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_type</strong> – The type of motor to scan for.</p></li>
+<li><p><strong>ifaces</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>) – The CAN interfaces to scan on.</p></li>
+<li><p><strong>delay</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The delay between sending commands to the motors.</p></li>
+<li><p><strong>wait_time</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The time to wait for replies after a burst of commands.</p></li>
+<li><p><strong>attempts</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The number of attempts to make to find the motor.</p></li>
+<li><p><strong>ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>] </em><em>| </em><em>None</em>) – Motor ids to probe. <code class="docutils literal notranslate"><span class="pre">None</span></code> scans every id in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">MAX_NUM_ACTUATORS)</span></code>.</p></li>
+<li><p><strong>motor_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p></li>
+<li><p><strong>config_path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
 <dt>A Tuple of (<cite>found</cite>, <cite>buses</cite>). <cite>found</cite> is a list of tuples of (<cite>motor_type</cite>, <cite>bus</cite>, <cite>id</cite>), and <cite>buses</cite> is a</dt><dd><p>list of all bus indices that were scanned.</p>
 </dd>
 </dl>
 </p>
-</dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>motor_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p></li>
-<li><p><strong>ifaces</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p></li>
-<li><p><strong>delay</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
-<li><p><strong>wait_time</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
-<li><p><strong>config_path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>attempts</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
-</ul>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><em>Tuple</em></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><em>Tuple</em></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a>]], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><em>List</em></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a>]]</p>
